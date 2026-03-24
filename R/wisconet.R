@@ -163,7 +163,7 @@ Wisconet <- R6Class(
       self$stations <- resp |>
         mutate(across(earliest_api_date, mdy)) |>
         select(
-          -any_of(c("campbell_cloud_id", "legacy_id"))
+          -any_of(c("id", "campbell_cloud_id", "legacy_id"))
         ) |>
         filter(!grepl("TEST", station_id))
       invisible(self)
