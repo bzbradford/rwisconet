@@ -1,0 +1,2630 @@
+{
+  "data": [
+    {
+      "collection_time": 1742774400,
+      "measures": [
+        [
+          1,
+          38.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742774700,
+      "measures": [
+        [
+          1,
+          38.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742775000,
+      "measures": [
+        [
+          1,
+          37.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742775300,
+      "measures": [
+        [
+          1,
+          37.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742775600,
+      "measures": [
+        [
+          1,
+          37.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742775900,
+      "measures": [
+        [
+          1,
+          37.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742776200,
+      "measures": [
+        [
+          1,
+          36.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742776500,
+      "measures": [
+        [
+          1,
+          36.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742776800,
+      "measures": [
+        [
+          1,
+          36.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742777100,
+      "measures": [
+        [
+          1,
+          36.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742777400,
+      "measures": [
+        [
+          1,
+          36.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742777700,
+      "measures": [
+        [
+          1,
+          36.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742778000,
+      "measures": [
+        [
+          1,
+          36.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742778300,
+      "measures": [
+        [
+          1,
+          35.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742778600,
+      "measures": [
+        [
+          1,
+          35.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742778900,
+      "measures": [
+        [
+          1,
+          35.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742779200,
+      "measures": [
+        [
+          1,
+          35.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742779500,
+      "measures": [
+        [
+          1,
+          35.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742779800,
+      "measures": [
+        [
+          1,
+          35.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742780100,
+      "measures": [
+        [
+          1,
+          35.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742780400,
+      "measures": [
+        [
+          1,
+          36.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742780700,
+      "measures": [
+        [
+          1,
+          36.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742781000,
+      "measures": [
+        [
+          1,
+          36.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742781300,
+      "measures": [
+        [
+          1,
+          36.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742781600,
+      "measures": [
+        [
+          1,
+          36.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742781900,
+      "measures": [
+        [
+          1,
+          36.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742782200,
+      "measures": [
+        [
+          1,
+          36.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742782500,
+      "measures": [
+        [
+          1,
+          36.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742782800,
+      "measures": [
+        [
+          1,
+          36.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742783100,
+      "measures": [
+        [
+          1,
+          36.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742783400,
+      "measures": [
+        [
+          1,
+          36.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742783700,
+      "measures": [
+        [
+          1,
+          36.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742784000,
+      "measures": [
+        [
+          1,
+          36.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742784300,
+      "measures": [
+        [
+          1,
+          35.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742784600,
+      "measures": [
+        [
+          1,
+          35.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742784900,
+      "measures": [
+        [
+          1,
+          35.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742785200,
+      "measures": [
+        [
+          1,
+          35.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742785500,
+      "measures": [
+        [
+          1,
+          35.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742785800,
+      "measures": [
+        [
+          1,
+          35.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742786100,
+      "measures": [
+        [
+          1,
+          35.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742786400,
+      "measures": [
+        [
+          1,
+          35.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742786700,
+      "measures": [
+        [
+          1,
+          35.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742787000,
+      "measures": [
+        [
+          1,
+          35.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742787300,
+      "measures": [
+        [
+          1,
+          35.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742787600,
+      "measures": [
+        [
+          1,
+          34.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742787900,
+      "measures": [
+        [
+          1,
+          34.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742788200,
+      "measures": [
+        [
+          1,
+          34.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742788500,
+      "measures": [
+        [
+          1,
+          34.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742788800,
+      "measures": [
+        [
+          1,
+          34.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742789100,
+      "measures": [
+        [
+          1,
+          34.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742789400,
+      "measures": [
+        [
+          1,
+          34.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742789700,
+      "measures": [
+        [
+          1,
+          34.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742790000,
+      "measures": [
+        [
+          1,
+          34.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742790300,
+      "measures": [
+        [
+          1,
+          33.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742790600,
+      "measures": [
+        [
+          1,
+          33.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742790900,
+      "measures": [
+        [
+          1,
+          33.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742791200,
+      "measures": [
+        [
+          1,
+          33.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742791500,
+      "measures": [
+        [
+          1,
+          33.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742791800,
+      "measures": [
+        [
+          1,
+          33.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742792100,
+      "measures": [
+        [
+          1,
+          33.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742792400,
+      "measures": [
+        [
+          1,
+          33.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742792700,
+      "measures": [
+        [
+          1,
+          33.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742793000,
+      "measures": [
+        [
+          1,
+          33.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742793300,
+      "measures": [
+        [
+          1,
+          33.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742793600,
+      "measures": [
+        [
+          1,
+          33.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742793900,
+      "measures": [
+        [
+          1,
+          33.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742794200,
+      "measures": [
+        [
+          1,
+          33.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742794500,
+      "measures": [
+        [
+          1,
+          33.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742794800,
+      "measures": [
+        [
+          1,
+          33.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742795100,
+      "measures": [
+        [
+          1,
+          33.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742795400,
+      "measures": [
+        [
+          1,
+          33.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742795700,
+      "measures": [
+        [
+          1,
+          32.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742796000,
+      "measures": [
+        [
+          1,
+          32.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742796300,
+      "measures": [
+        [
+          1,
+          32.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742796600,
+      "measures": [
+        [
+          1,
+          32.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742796900,
+      "measures": [
+        [
+          1,
+          32.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742797200,
+      "measures": [
+        [
+          1,
+          32.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742797500,
+      "measures": [
+        [
+          1,
+          32.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742797800,
+      "measures": [
+        [
+          1,
+          32.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742798100,
+      "measures": [
+        [
+          1,
+          32.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742798400,
+      "measures": [
+        [
+          1,
+          32.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742798700,
+      "measures": [
+        [
+          1,
+          32.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742799000,
+      "measures": [
+        [
+          1,
+          32.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742799300,
+      "measures": [
+        [
+          1,
+          32.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742799600,
+      "measures": [
+        [
+          1,
+          31.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742799900,
+      "measures": [
+        [
+          1,
+          31.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742800200,
+      "measures": [
+        [
+          1,
+          31.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742800500,
+      "measures": [
+        [
+          1,
+          31.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742800800,
+      "measures": [
+        [
+          1,
+          31.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742801100,
+      "measures": [
+        [
+          1,
+          31.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742801400,
+      "measures": [
+        [
+          1,
+          31.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742801700,
+      "measures": [
+        [
+          1,
+          31.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742802000,
+      "measures": [
+        [
+          1,
+          31.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742802300,
+      "measures": [
+        [
+          1,
+          31.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742802600,
+      "measures": [
+        [
+          1,
+          31.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742802900,
+      "measures": [
+        [
+          1,
+          30.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742803200,
+      "measures": [
+        [
+          1,
+          30.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742803500,
+      "measures": [
+        [
+          1,
+          30.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742803800,
+      "measures": [
+        [
+          1,
+          30.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742804100,
+      "measures": [
+        [
+          1,
+          30.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742804400,
+      "measures": [
+        [
+          1,
+          30.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742804700,
+      "measures": [
+        [
+          1,
+          30.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742805000,
+      "measures": [
+        [
+          1,
+          29.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742805300,
+      "measures": [
+        [
+          1,
+          29.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742805600,
+      "measures": [
+        [
+          1,
+          29.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742805900,
+      "measures": [
+        [
+          1,
+          29.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742806200,
+      "measures": [
+        [
+          1,
+          29.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742806500,
+      "measures": [
+        [
+          1,
+          29.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742806800,
+      "measures": [
+        [
+          1,
+          29.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742807100,
+      "measures": [
+        [
+          1,
+          29.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742807400,
+      "measures": [
+        [
+          1,
+          28.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742807700,
+      "measures": [
+        [
+          1,
+          28.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742808000,
+      "measures": [
+        [
+          1,
+          28.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742808300,
+      "measures": [
+        [
+          1,
+          29.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742808600,
+      "measures": [
+        [
+          1,
+          29.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742808900,
+      "measures": [
+        [
+          1,
+          29.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742809200,
+      "measures": [
+        [
+          1,
+          29.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742809500,
+      "measures": [
+        [
+          1,
+          29.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742809800,
+      "measures": [
+        [
+          1,
+          29.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742810100,
+      "measures": [
+        [
+          1,
+          29.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742810400,
+      "measures": [
+        [
+          1,
+          29.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742810700,
+      "measures": [
+        [
+          1,
+          29.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742811000,
+      "measures": [
+        [
+          1,
+          29.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742811300,
+      "measures": [
+        [
+          1,
+          29.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742811600,
+      "measures": [
+        [
+          1,
+          29.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742811900,
+      "measures": [
+        [
+          1,
+          29.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742812200,
+      "measures": [
+        [
+          1,
+          29.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742812500,
+      "measures": [
+        [
+          1,
+          29.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742812800,
+      "measures": [
+        [
+          1,
+          28.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742813100,
+      "measures": [
+        [
+          1,
+          28.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742813400,
+      "measures": [
+        [
+          1,
+          28.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742813700,
+      "measures": [
+        [
+          1,
+          28.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742814000,
+      "measures": [
+        [
+          1,
+          28.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742814300,
+      "measures": [
+        [
+          1,
+          28.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742814600,
+      "measures": [
+        [
+          1,
+          28.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742814900,
+      "measures": [
+        [
+          1,
+          28.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742815200,
+      "measures": [
+        [
+          1,
+          28.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742815500,
+      "measures": [
+        [
+          1,
+          28.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742815800,
+      "measures": [
+        [
+          1,
+          28.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742816100,
+      "measures": [
+        [
+          1,
+          28.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742816400,
+      "measures": [
+        [
+          1,
+          28.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742816700,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742817000,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742817300,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742817600,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742817900,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742818200,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742818500,
+      "measures": [
+        [
+          1,
+          28.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742818800,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742819100,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742819400,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742819700,
+      "measures": [
+        [
+          1,
+          28.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742820000,
+      "measures": [
+        [
+          1,
+          28.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742820300,
+      "measures": [
+        [
+          1,
+          28.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742820600,
+      "measures": [
+        [
+          1,
+          28.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742820900,
+      "measures": [
+        [
+          1,
+          28.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742821200,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742821500,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742821800,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742822100,
+      "measures": [
+        [
+          1,
+          28.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742822400,
+      "measures": [
+        [
+          1,
+          28.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742822700,
+      "measures": [
+        [
+          1,
+          28.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742823000,
+      "measures": [
+        [
+          1,
+          28.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742823300,
+      "measures": [
+        [
+          1,
+          28.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742823600,
+      "measures": [
+        [
+          1,
+          28.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742823900,
+      "measures": [
+        [
+          1,
+          28.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742824200,
+      "measures": [
+        [
+          1,
+          28.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742824500,
+      "measures": [
+        [
+          1,
+          28.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742824800,
+      "measures": [
+        [
+          1,
+          28.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742825100,
+      "measures": [
+        [
+          1,
+          28.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742825400,
+      "measures": [
+        [
+          1,
+          28.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742825700,
+      "measures": [
+        [
+          1,
+          28.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742826000,
+      "measures": [
+        [
+          1,
+          28.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742826300,
+      "measures": [
+        [
+          1,
+          28.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742826600,
+      "measures": [
+        [
+          1,
+          28.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742826900,
+      "measures": [
+        [
+          1,
+          29.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742827200,
+      "measures": [
+        [
+          1,
+          29.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742827500,
+      "measures": [
+        [
+          1,
+          29.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742827800,
+      "measures": [
+        [
+          1,
+          29.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742828100,
+      "measures": [
+        [
+          1,
+          30.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742828400,
+      "measures": [
+        [
+          1,
+          30.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742828700,
+      "measures": [
+        [
+          1,
+          30.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742829000,
+      "measures": [
+        [
+          1,
+          30.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742829300,
+      "measures": [
+        [
+          1,
+          30.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742829600,
+      "measures": [
+        [
+          1,
+          30.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742829900,
+      "measures": [
+        [
+          1,
+          30.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742830200,
+      "measures": [
+        [
+          1,
+          30.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742830500,
+      "measures": [
+        [
+          1,
+          30.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742830800,
+      "measures": [
+        [
+          1,
+          30.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742831100,
+      "measures": [
+        [
+          1,
+          30.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742831400,
+      "measures": [
+        [
+          1,
+          30.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742831700,
+      "measures": [
+        [
+          1,
+          30.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742832000,
+      "measures": [
+        [
+          1,
+          31.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742832300,
+      "measures": [
+        [
+          1,
+          31.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742832600,
+      "measures": [
+        [
+          1,
+          31.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742832900,
+      "measures": [
+        [
+          1,
+          31.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742833200,
+      "measures": [
+        [
+          1,
+          31.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742833500,
+      "measures": [
+        [
+          1,
+          31.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742833800,
+      "measures": [
+        [
+          1,
+          32.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742834100,
+      "measures": [
+        [
+          1,
+          32.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742834400,
+      "measures": [
+        [
+          1,
+          32.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742834700,
+      "measures": [
+        [
+          1,
+          32.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742835000,
+      "measures": [
+        [
+          1,
+          32.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742835300,
+      "measures": [
+        [
+          1,
+          31.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742835600,
+      "measures": [
+        [
+          1,
+          32.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742835900,
+      "measures": [
+        [
+          1,
+          32.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742836200,
+      "measures": [
+        [
+          1,
+          32.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742836500,
+      "measures": [
+        [
+          1,
+          34.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742836800,
+      "measures": [
+        [
+          1,
+          34.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742837100,
+      "measures": [
+        [
+          1,
+          35.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742837400,
+      "measures": [
+        [
+          1,
+          34.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742837700,
+      "measures": [
+        [
+          1,
+          33.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742838000,
+      "measures": [
+        [
+          1,
+          35.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742838300,
+      "measures": [
+        [
+          1,
+          35.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742838600,
+      "measures": [
+        [
+          1,
+          36.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742838900,
+      "measures": [
+        [
+          1,
+          35.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742839200,
+      "measures": [
+        [
+          1,
+          36.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742839500,
+      "measures": [
+        [
+          1,
+          36.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742839800,
+      "measures": [
+        [
+          1,
+          36.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742840100,
+      "measures": [
+        [
+          1,
+          36.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742840400,
+      "measures": [
+        [
+          1,
+          36.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742840700,
+      "measures": [
+        [
+          1,
+          37.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742841000,
+      "measures": [
+        [
+          1,
+          37.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742841300,
+      "measures": [
+        [
+          1,
+          37.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742841600,
+      "measures": [
+        [
+          1,
+          37.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742841900,
+      "measures": [
+        [
+          1,
+          38.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742842200,
+      "measures": [
+        [
+          1,
+          39.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742842500,
+      "measures": [
+        [
+          1,
+          39.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742842800,
+      "measures": [
+        [
+          1,
+          38.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742843100,
+      "measures": [
+        [
+          1,
+          39.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742843400,
+      "measures": [
+        [
+          1,
+          40.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742843700,
+      "measures": [
+        [
+          1,
+          39.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742844000,
+      "measures": [
+        [
+          1,
+          39.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742844300,
+      "measures": [
+        [
+          1,
+          40.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742844600,
+      "measures": [
+        [
+          1,
+          40.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742844900,
+      "measures": [
+        [
+          1,
+          39.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742845200,
+      "measures": [
+        [
+          1,
+          40.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742845500,
+      "measures": [
+        [
+          1,
+          40.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742845800,
+      "measures": [
+        [
+          1,
+          41.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742846100,
+      "measures": [
+        [
+          1,
+          40.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742846400,
+      "measures": [
+        [
+          1,
+          41.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742846700,
+      "measures": [
+        [
+          1,
+          41.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742847000,
+      "measures": [
+        [
+          1,
+          41.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742847300,
+      "measures": [
+        [
+          1,
+          41.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742847600,
+      "measures": [
+        [
+          1,
+          42.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742847900,
+      "measures": [
+        [
+          1,
+          42.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742848200,
+      "measures": [
+        [
+          1,
+          42.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742848500,
+      "measures": [
+        [
+          1,
+          41.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742848800,
+      "measures": [
+        [
+          1,
+          42.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742849100,
+      "measures": [
+        [
+          1,
+          42.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742849400,
+      "measures": [
+        [
+          1,
+          42.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742849700,
+      "measures": [
+        [
+          1,
+          42.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742850000,
+      "measures": [
+        [
+          1,
+          42.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742850300,
+      "measures": [
+        [
+          1,
+          42.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742850600,
+      "measures": [
+        [
+          1,
+          42.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742850900,
+      "measures": [
+        [
+          1,
+          42.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742851200,
+      "measures": [
+        [
+          1,
+          42.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742851500,
+      "measures": [
+        [
+          1,
+          42.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742851800,
+      "measures": [
+        [
+          1,
+          42.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742852100,
+      "measures": [
+        [
+          1,
+          43.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742852400,
+      "measures": [
+        [
+          1,
+          43.1
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742852700,
+      "measures": [
+        [
+          1,
+          42.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742853000,
+      "measures": [
+        [
+          1,
+          42.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742853300,
+      "measures": [
+        [
+          1,
+          42.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742853600,
+      "measures": [
+        [
+          1,
+          42.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742853900,
+      "measures": [
+        [
+          1,
+          42.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742854200,
+      "measures": [
+        [
+          1,
+          42.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742854500,
+      "measures": [
+        [
+          1,
+          42.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742854800,
+      "measures": [
+        [
+          1,
+          42.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742855100,
+      "measures": [
+        [
+          1,
+          42.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742855400,
+      "measures": [
+        [
+          1,
+          42.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742855700,
+      "measures": [
+        [
+          1,
+          42.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742856000,
+      "measures": [
+        [
+          1,
+          42.7
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742856300,
+      "measures": [
+        [
+          1,
+          42.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742856600,
+      "measures": [
+        [
+          1,
+          42.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742856900,
+      "measures": [
+        [
+          1,
+          42.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742857200,
+      "measures": [
+        [
+          1,
+          42.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742857500,
+      "measures": [
+        [
+          1,
+          42.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742857800,
+      "measures": [
+        [
+          1,
+          42.3
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742858100,
+      "measures": [
+        [
+          1,
+          42.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742858400,
+      "measures": [
+        [
+          1,
+          42.0
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742858700,
+      "measures": [
+        [
+          1,
+          41.9
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742859000,
+      "measures": [
+        [
+          1,
+          41.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742859300,
+      "measures": [
+        [
+          1,
+          41.2
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742859600,
+      "measures": [
+        [
+          1,
+          40.8
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742859900,
+      "measures": [
+        [
+          1,
+          40.6
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742860200,
+      "measures": [
+        [
+          1,
+          40.4
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742860500,
+      "measures": [
+        [
+          1,
+          40.5
+        ]
+      ]
+    },
+    {
+      "collection_time": 1742860800,
+      "measures": [
+        [
+          1,
+          40.1
+        ]
+      ]
+    }
+  ],
+  "fieldlist": [
+    {
+      "id": 1,
+      "standard_name": "5min_air_temp_f_avg",
+      "use_for": "",
+      "measure_type": "Air Temp",
+      "qualifier": "avg",
+      "sensor": "",
+      "source_field": "airtemp_c_avg@Table5",
+      "data_type": "float",
+      "source_units": "celsius",
+      "final_units": "fahrenheit",
+      "units_abbrev": "f",
+      "conversion_type": "c2f",
+      "collection_frequency": "5min",
+      "units_system": null,
+      "frequency": null,
+      "measure": null,
+      "units": null,
+      "agg": null,
+      "base_field": null
+    }
+  ],
+  "warnings": [],
+  "time": 1774379621
+}
