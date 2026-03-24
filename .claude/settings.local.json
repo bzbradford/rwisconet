@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(curl -s \"https://wisconet.wisc.edu/api/v1/stations/ALTN/measures?start_time=1742774400&end_time=1742860800&fields=avg_air_temp\" -o \"d:/OneDrive - UW-Madison/R Projects/rwisconet/tests/testthat/fixtures/measures_ALTN.json\")",
-      "Bash(curl -sL \"https://wisconet.wisc.edu/api/v1/fields\" -o \"d:/OneDrive - UW-Madison/R Projects/rwisconet/tests/testthat/fixtures/fields.json\")"
-    ]
-  }
-}
