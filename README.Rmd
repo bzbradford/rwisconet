@@ -27,7 +27,7 @@ remotes::install_github("bzbradford/rwisconet")
 
 ### Initialize the client
 
-Creating a new client automatically fetches station and field metadata from the API. Timestamps are parsed using your system timezone by default.
+Creating a new client automatically fetches station and field metadata from the API. Default timezone is "America/Chicago" for interpreting date/time ranges and the conversion of UTC to local time.
 
 ```{r}
 suppressPackageStartupMessages(library(tidyverse))
@@ -72,6 +72,9 @@ The fields table is stored in `wn$fields`. Use `find_fields()` to filter by meas
 ```{r}
 # List all available fields
 wn$fields
+
+# Calling find_fields with no args shows types and frequency options
+wn$find_fields()
 
 # Show air temp fields
 wn$find_fields(type = "Air Temp")

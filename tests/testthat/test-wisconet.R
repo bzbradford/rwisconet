@@ -90,10 +90,16 @@ test_that("find_nearest_station rejects out-of-bounds coordinates", {
 
 test_that("find_fields with no args returns all fields and messages", {
   w <- make_test_client()
-  expect_message(
-    result <- w$find_fields(),
-    "Available"
+  msgs <- character(0)
+  result <- withCallingHandlers(
+    w$find_fields(),
+    message = function(m) {
+      msgs <<- c(msgs, conditionMessage(m))
+      invokeRestart("muffleMessage")
+    }
   )
+  expect_true(any(grepl("Available.*type", msgs)))
+  expect_true(any(grepl("Available.*freq", msgs)))
   expect_equal(nrow(result), nrow(w$fields))
 })
 

@@ -131,7 +131,7 @@ Wisconet <- R6Class(
     stations = NULL,
     #' @field fields Tibble of available field definitions, populated by `get_fields()`.
     fields = NULL,
-    #' @field timezone Timezone used when parsing observation timestamps. Defaults to system timezone.
+    #' @field timezone Timezone used when parsing observation timestamps. Defaults to local time for the mesonet ("America/Chicago").
     timezone = NULL,
 
     #' @description

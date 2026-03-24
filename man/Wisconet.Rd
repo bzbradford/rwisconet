@@ -15,7 +15,7 @@ available field definitions, and observation data for one or more stations.
 
 \item{\code{fields}}{Tibble of available field definitions, populated by \code{get_fields()}.}
 
-\item{\code{timezone}}{Timezone used when parsing observation timestamps. Defaults to system timezone.}
+\item{\code{timezone}}{Timezone used when parsing observation timestamps. Defaults to local time for the mesonet ("America/Chicago").}
 }
 \if{html}{\out{</div>}}
 }
