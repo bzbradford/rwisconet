@@ -16,11 +16,13 @@ Initialize the client. \code{timezone} defaults to \code{Sys.timezone()}.
 Set \code{fetch_on_init = FALSE} to skip the initial metadata fetch.
 }
 \item{\code{get_stations()}}{Fetch/refresh the station metadata table.}
+\item{\code{find_nearest_station()}}{Find the nearest station(s) to a given latitude and longitude.}
 \item{\code{get_fields()}}{Fetch/refresh the available fields table.}
+\item{\code{find_fields()}}{Filter the list of available fields by type and/or frequency.}
 \item{\code{get_measures(stn_id, fields, start_time, end_time)}}{
 Fetch observations for a single station.
 }
-\item{\code{get_measures_stations(stn_ids, fields, start_time, end_time, max_reqs_per_sec)}}{
+\item{\code{get_measures_stations(stn_ids, fields, start_time, end_time, max_concurrent)}}{
 Fetch observations for a specific set of stations in parallel.
 \code{start_time} may be a named list (keyed by \code{stn_id}) to use
 per-station start times.
@@ -42,7 +44,7 @@ Requires the \pkg{leaflet} package.
 
 \item{\code{fields}}{Tibble of available field definitions, populated by \code{get_fields()}.}
 
-\item{\code{timezone}}{Timezone used when parsing observation timestamps.}
+\item{\code{timezone}}{Timezone used when parsing observation timestamps. Defaults to system timezone.}
 }
 \if{html}{\out{</div>}}
 }
@@ -51,7 +53,9 @@ Requires the \pkg{leaflet} package.
 \itemize{
 \item \href{#method-Wisconet-new}{\code{Wisconet$new()}}
 \item \href{#method-Wisconet-get_stations}{\code{Wisconet$get_stations()}}
+\item \href{#method-Wisconet-find_nearest_station}{\code{Wisconet$find_nearest_station()}}
 \item \href{#method-Wisconet-get_fields}{\code{Wisconet$get_fields()}}
+\item \href{#method-Wisconet-find_fields}{\code{Wisconet$find_fields()}}
 \item \href{#method-Wisconet-get_measures}{\code{Wisconet$get_measures()}}
 \item \href{#method-Wisconet-get_measures_stations}{\code{Wisconet$get_measures_stations()}}
 \item \href{#method-Wisconet-get_measures_all}{\code{Wisconet$get_measures_all()}}
@@ -93,15 +97,59 @@ Wrapper for \verb{/api/v1/stations/}
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Wisconet-find_nearest_station"></a>}}
+\if{latex}{\out{\hypertarget{method-Wisconet-find_nearest_station}{}}}
+\subsection{Method \code{find_nearest_station()}}{
+Find the nearest station(s) to a given latitude and longitude.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Wisconet$find_nearest_station(lat, lng, n = 1)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{lat}}{Numeric. Latitude of point to search from.}
+
+\item{\code{lng}}{Numeric. Longitude of point to search from.}
+
+\item{\code{n}}{Integer. Number of nearest stations to return. Default \code{1}.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Wisconet-get_fields"></a>}}
 \if{latex}{\out{\hypertarget{method-Wisconet-get_fields}{}}}
 \subsection{Method \code{get_fields()}}{
 Fetch or refresh the available field definitions from the API.
-Wrapper for \verb{/api/v1/stations/}
+Wrapper for \verb{/api/v1/fields/}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Wisconet$get_fields()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Wisconet-find_fields"></a>}}
+\if{latex}{\out{\hypertarget{method-Wisconet-find_fields}{}}}
+\subsection{Method \code{find_fields()}}{
+Filter the list of available fields by type and/or frequency.
+Called with no arguments, prints the available filter options
+and returns the full fields table.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Wisconet$find_fields(type = NULL, freq = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{type}}{Character. A measure type to filter by (e.g. \code{"Air Temp"},
+\code{"Soil Temp"}).}
+
+\item{\code{freq}}{Character. A collection frequency to filter by (e.g.
+\code{"5min"}, \code{"60min"}, \code{"daily"}).}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Wisconet-get_measures"></a>}}
@@ -141,7 +189,7 @@ start times.
   fields,
   start_time,
   end_time = now(),
-  max_reqs_per_sec = 10
+  max_concurrent = 10
 )}\if{html}{\out{</div>}}
 }
 
@@ -158,7 +206,7 @@ keyed by station ID for per-station start times.}
 \item{\code{end_time}}{A \code{POSIXct} datetime for the end of the query window.
 Defaults to \code{now()}.}
 
-\item{\code{max_reqs_per_sec}}{Integer. Maximum number of concurrent requests.
+\item{\code{max_concurrent}}{Integer. Maximum number of concurrent requests.
 Default \code{10}.}
 }
 \if{html}{\out{</div>}}
@@ -201,6 +249,7 @@ Requires the \pkg{leaflet} package.
 \if{html}{\out{<a id="method-Wisconet-print"></a>}}
 \if{latex}{\out{\hypertarget{method-Wisconet-print}{}}}
 \subsection{Method \code{print()}}{
+Prints a status message when the class is called without any arguments.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Wisconet$print(...)}\if{html}{\out{</div>}}
 }
