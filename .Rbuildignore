@@ -1,2 +1,9 @@
 ^rwisconet\.Rproj$
 ^\.Rproj\.user$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^LICENSE\.md$
+^\.github$
+^\.claude$
+^README\.Rmd$

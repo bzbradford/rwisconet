@@ -5,33 +5,6 @@
 #' (<https://wisconet.wisc.edu/api/v1>). Supports fetching station metadata,
 #' available field definitions, and observation data for one or more stations.
 #'
-#' @section Methods:
-#' \describe{
-#'   \item{`new(timezone, fetch_on_init)`}{
-#'     Initialize the client. `timezone` defaults to `Sys.timezone()`.
-#'     Set `fetch_on_init = FALSE` to skip the initial metadata fetch.
-#'   }
-#'   \item{`get_stations()`}{Fetch/refresh the station metadata table.}
-#'   \item{`find_nearest_station()`}{Find the nearest station(s) to a given latitude and longitude.}
-#'   \item{`get_fields()`}{Fetch/refresh the available fields table.}
-#'   \item{`find_fields()`}{Filter the list of available fields by type and/or frequency.}
-#'   \item{`get_measures(stn_id, fields, start_time, end_time)`}{
-#'     Fetch observations for a single station.
-#'   }
-#'   \item{`get_measures_stations(stn_ids, fields, start_time, end_time, max_concurrent)`}{
-#'     Fetch observations for a specific set of stations in parallel.
-#'     `start_time` may be a named list (keyed by `stn_id`) to use
-#'     per-station start times.
-#'   }
-#'   \item{`get_measures_all(fields, start_time, end_time)`}{
-#'     Fetch observations for all active stations in parallel.
-#'   }
-#'   \item{`map_stations()`}{
-#'     Display stations on an interactive leaflet map.
-#'     Requires the \pkg{leaflet} package.
-#'   }
-#' }
-#'
 #' @export
 #'
 #' @importFrom R6 R6Class
@@ -106,7 +79,8 @@ Wisconet <- R6Class(
         unnest_wider(value) |>
         mutate(
           dttm = as_datetime(collection_time),
-          date = as_date(dttm, tz = self$timezone),
+          dttm_local = with_tz(dttm, self$timezone),
+          date = as_date(dttm_local),
           .after = collection_time
         ) |>
         unnest_longer(measures) |>
@@ -164,11 +138,11 @@ Wisconet <- R6Class(
     #' Initializes the class.
     #'
     #' @param timezone Character. Timezone for parsing observation timestamps.
-    #'   Defaults to the system timezone.
+    #'   Defaults to "America/Chicago".
     #' @param fetch_on_init Logical. Whether to fetch station and field metadata
     #'   on initialization. Default `TRUE`.
     #'
-    initialize = function(timezone = Sys.timezone(), fetch_on_init = TRUE) {
+    initialize = function(timezone = "America/Chicago", fetch_on_init = TRUE) {
       self$timezone <- timezone
       if (fetch_on_init) {
         self$get_stations()
@@ -279,7 +253,7 @@ Wisconet <- R6Class(
       for (name in names(active)) {
         col <- filter_map[[name]]
         val <- active[[name]]
-        valid <- unique(fields[[col]])
+        valid <- unique(self$fields[[col]])
         if (!(val %in% valid)) {
           valid_list <- paste(sprintf("'%s'", valid), collapse = ", ")
           stop("Invalid ", name, " '", val, "'. Must be one of: ", valid_list)
@@ -345,24 +319,45 @@ Wisconet <- R6Class(
     ) {
       private$validate_inputs(stn_ids, fields)
 
+      # Validate start_time
+      if (length(start_time) > 1 || !is.null(names(start_time))) {
+        if (is.null(names(start_time))) {
+          stop(
+            "`start_time` must be length 1 or a named vector keyed by station ID"
+          )
+        }
+        if (!setequal(names(start_time), stn_ids)) {
+          stop("`start_time` names must match `stn_ids`")
+        }
+      }
+
+      # Validate end_time
+      if (length(end_time) > 1 || !is.null(names(end_time))) {
+        if (is.null(names(end_time))) {
+          stop(
+            "`end_time` must be length 1 or a named vector keyed by station ID"
+          )
+        }
+        if (!setequal(names(end_time), stn_ids)) {
+          stop("`end_time` names must match `stn_ids`")
+        }
+      }
+
       message("Fetching ", length(stn_ids), " stations")
 
-      reqs <- if (length(start_time) > 1) {
-        map(
-          stn_ids,
-          ~ private$build_measures_request(
-            .x,
-            fields,
-            start_time[[.x]],
-            end_time
-          )
+      reqs <- map(
+        stn_ids,
+        ~ private$build_measures_request(
+          .x,
+          fields,
+          start_time = if (!is.null(names(start_time))) {
+            start_time[[.x]]
+          } else {
+            start_time
+          },
+          end_time = if (!is.null(names(end_time))) end_time[[.x]] else end_time
         )
-      } else {
-        map(
-          stn_ids,
-          ~ private$build_measures_request(.x, fields, start_time, end_time)
-        )
-      }
+      )
 
       t <- now()
       resps <- req_perform_parallel(

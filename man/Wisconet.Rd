@@ -8,35 +8,6 @@ An R6 class providing an interface to the Wisconet v1 API
 (\url{https://wisconet.wisc.edu/api/v1}). Supports fetching station metadata,
 available field definitions, and observation data for one or more stations.
 }
-\section{Methods}{
-
-\describe{
-\item{\code{new(timezone, fetch_on_init)}}{
-Initialize the client. \code{timezone} defaults to \code{Sys.timezone()}.
-Set \code{fetch_on_init = FALSE} to skip the initial metadata fetch.
-}
-\item{\code{get_stations()}}{Fetch/refresh the station metadata table.}
-\item{\code{find_nearest_station()}}{Find the nearest station(s) to a given latitude and longitude.}
-\item{\code{get_fields()}}{Fetch/refresh the available fields table.}
-\item{\code{find_fields()}}{Filter the list of available fields by type and/or frequency.}
-\item{\code{get_measures(stn_id, fields, start_time, end_time)}}{
-Fetch observations for a single station.
-}
-\item{\code{get_measures_stations(stn_ids, fields, start_time, end_time, max_concurrent)}}{
-Fetch observations for a specific set of stations in parallel.
-\code{start_time} may be a named list (keyed by \code{stn_id}) to use
-per-station start times.
-}
-\item{\code{get_measures_all(fields, start_time, end_time)}}{
-Fetch observations for all active stations in parallel.
-}
-\item{\code{map_stations()}}{
-Display stations on an interactive leaflet map.
-Requires the \pkg{leaflet} package.
-}
-}
-}
-
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
@@ -70,14 +41,14 @@ Requires the \pkg{leaflet} package.
 \subsection{Method \code{new()}}{
 Initializes the class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Wisconet$new(timezone = Sys.timezone(), fetch_on_init = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Wisconet$new(timezone = "America/Chicago", fetch_on_init = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{timezone}}{Character. Timezone for parsing observation timestamps.
-Defaults to the system timezone.}
+Defaults to "America/Chicago".}
 
 \item{\code{fetch_on_init}}{Logical. Whether to fetch station and field metadata
 on initialization. Default \code{TRUE}.}

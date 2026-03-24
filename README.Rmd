@@ -1,0 +1,218 @@
+---
+output: github_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE
+)
+```
+
+# Wisconet v1 API wrapper for R
+
+`rwisconet` provides an interface to the Wisconet v1 API (<https://wisconet.wisc.edu/api/v1>). Supports fetching station metadata, available field definitions, and observation data for one or more stations.
+
+## Installation
+
+```{r, eval=FALSE}
+remotes::install_github("bzbradford/rwisconet")
+```
+
+## Basic Usage
+
+### Initialize the client
+
+Creating a new client automatically fetches station and field metadata from the API. Timestamps are parsed using your system timezone by default.
+
+```{r}
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(rwisconet)
+})
+
+wn <- Wisconet$new()
+wn
+```
+
+You can skip the initial metadata fetch or use a different timezone. Normally you would not do this.
+
+```{r, eval=FALSE}
+wn <- Wisconet$new(timezone = "US/Eastern", fetch_on_init = FALSE)
+```
+
+### Explore stations
+
+The station metadata table is stored in `wn$stations`. You can refresh it at any time with `wn$get_stations()`.
+
+```{r}
+wn$stations
+```
+
+Find the nearest station(s) to a given point:
+
+```{r}
+wn$find_nearest_station(lat = 43.07, lng = -89.40, n = 3)
+```
+
+Display all stations on an interactive map (requires the `leaflet` package):
+
+```{r, eval=FALSE}
+library(leaflet)
+
+wn$map_stations()
+```
+
+### Explore available fields
+
+The fields table is stored in `wn$fields`. Use `find_fields()` to filter by measure type and/or collection frequency:
+  
+```{r}
+# List all available fields
+wn$fields
+
+# Show air temp fields
+wn$find_fields(type = "Air Temp")
+
+# show daily fields
+wn$find_fields(freq = "daily")
+
+# show air temp fields with 5 minute collection frequency
+wn$find_fields(type = "Air Temp", freq = "5min")
+```
+
+### Fetch observations
+
+#### Single station
+
+Use `get_measures()` to fetch data for one station. Provide a station ID, a vector of field `standard_name` values, and a time window. Returned data is formatted as `tibble` with station and measure metadata. 
+
+```{r}
+measures_5min <- c(
+  "5min_air_temp_f_avg",
+  "5min_relative_humidity_pct_avg",
+  "5min_wind_speed_mph_avg"
+)
+
+obs <- wn$get_measures(
+  stn_id = "HNCK", # Hancock
+  fields = measures_5min,
+  start_time = now() - days(1),
+  end_time = now()
+)
+
+obs
+```
+
+#### Multiple stations
+
+Use `get_measures_stations()` to fetch data for a specific set of stations in parallel:
+
+```{r}
+obs <- wn$get_measures_stations(
+  stn_ids = c("ALTN", "HNCK"), # Arlington, Hancock
+  fields = measures_5min,
+  start_time = now() - days(1),
+  end_time = now()
+)
+
+obs
+```
+
+#### Specific start/end times per station
+
+You can also pass a named list of per-station start and end times if you need to collect data for different timeframes by station.
+
+```{r}
+measures_daily <- c(
+  "daily_air_temp_f_min",
+  "daily_air_temp_f_avg",
+  "daily_air_temp_f_max"
+)
+
+starts <- list(
+  ALTN = now() - months(2),
+  HNCK = now() - months(1)
+)
+
+ends <- lapply(starts, \(x) x + days(7))
+
+obs <- wn$get_measures_stations(
+  stn_ids = names(starts),
+  fields = measures_daily,
+  start_time = starts,
+  end_time = ends
+)
+
+obs
+```
+
+#### All active stations
+
+Use `get_measures_all()` to query every active station:
+
+```{r}
+obs <- wn$get_measures_all(
+  fields = measures_daily,
+  start_time = today() - days(7),
+  end_time = today()
+)
+
+obs
+```
+
+### Handling received data
+
+You can simplify the returned data by selecting only a few important data columns.
+
+```{r}
+obs <- wn$get_measures_stations(
+  stn_ids = c("ALTN", "HNCK"), # Arlington, Hancock
+  fields = measures_daily,
+  start_time = now() - months(1),
+  end_time = now()
+)
+
+select_obs <- obs |>
+  select(station_id, dttm_local, date, standard_name, measure_value)
+
+obs_wide <- select_obs |>
+  pivot_wider(names_from = standard_name, values_from = measure_value)
+
+obs_wide
+```
+
+Generate a simple figure from the returned data:
+
+```{r fig}
+select_obs |>
+  ggplot(aes(x = dttm_local, y = measure_value, color = standard_name)) +
+  geom_line() +
+  facet_wrap(~station_id, ncol = 1) +
+  theme(legend.position = "bottom")
+```
+
+## Development
+
+Common tasks:
+
+```{r dev, eval=FALSE}
+# run tests
+testthat::test_dir("tests")
+
+# build documentation
+devtools::document()
+
+# check package
+devtools::check()
+
+# build package
+devtools::build()
+
+# build readme from Rmd
+devtools::build_readme()
+
+# build a pdf manual
+devtools::build_manual()
+```
