@@ -6,6 +6,9 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  dev = "png",
   warning = FALSE
 )
 ```
@@ -27,10 +30,8 @@ remotes::install_github("bzbradford/rwisconet")
 Creating a new client automatically fetches station and field metadata from the API. Timestamps are parsed using your system timezone by default.
 
 ```{r}
-suppressPackageStartupMessages({
-  library(tidyverse)
-  library(rwisconet)
-})
+suppressPackageStartupMessages(library(tidyverse))
+library(rwisconet)
 
 wn <- Wisconet$new()
 wn

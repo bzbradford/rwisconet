@@ -21,10 +21,8 @@ from the API. Timestamps are parsed using your system timezone by
 default.
 
 ``` r
-suppressPackageStartupMessages({
-  library(tidyverse)
-  library(rwisconet)
-})
+suppressPackageStartupMessages(library(tidyverse))
+library(rwisconet)
 
 wn <- Wisconet$new()
 wn
@@ -183,8 +181,8 @@ obs <- wn$get_measures(
   start_time = now() - days(1),
   end_time = now()
 )
-#> GET ==> HNCK: 2026-03-23 16:27:29.603636 to 2026-03-24 16:27:29.605551
-#>   Received 286 observations in 0.353s
+#> GET ==> HNCK: 2026-03-23 16:47:55.398654 to 2026-03-24 16:47:55.4006
+#>   Received 286 observations in 0.444s
 
 obs
 #> # A tibble: 858 × 32
@@ -222,7 +220,7 @@ obs <- wn$get_measures_stations(
   end_time = now()
 )
 #> Fetching 2 stations
-#>   Done: 2/2 stations returned data in 0.4s
+#>   Done: 2/2 stations returned data in 0.5s
 
 obs
 #> # A tibble: 1,719 × 32
@@ -273,7 +271,7 @@ obs <- wn$get_measures_stations(
   end_time = ends
 )
 #> Fetching 2 stations
-#>   Done: 2/2 stations returned data in 0.4s
+#>   Done: 2/2 stations returned data in 0.3s
 
 obs
 #> # A tibble: 42 × 32
@@ -309,7 +307,7 @@ obs <- wn$get_measures_all(
   end_time = today()
 )
 #> Fetching 78 stations
-#> Parsing responses ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    97% |  ETA:  0s                                                                     Done: 78/78 stations returned data in 2.8s
+#>   Done: 78/78 stations returned data in 2.8s
 
 obs
 #> # A tibble: 1,635 × 32
@@ -383,7 +381,7 @@ select_obs |>
   theme(legend.position = "bottom")
 ```
 
-![](README_files/figure-gfm/fig-1.png)<!-- -->
+<img src="man/figures/README-fig-1.png" alt="" width="100%" />
 
 ## Development
 
