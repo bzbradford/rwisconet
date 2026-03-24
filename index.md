@@ -16,8 +16,8 @@ remotes::install_github("bzbradford/rwisconet")
 ### Initialize the client
 
 Creating a new client automatically fetches station and field metadata
-from the API. Timestamps are parsed using your system timezone by
-default.
+from the API. Default timezone is “America/Chicago” for interpreting
+date/time ranges and the conversion of UTC to local time.
 
 ``` r
 suppressPackageStartupMessages(library(tidyverse))
@@ -180,8 +180,8 @@ obs <- wn$get_measures(
   start_time = now() - days(1),
   end_time = now()
 )
-#> GET ==> HNCK: 2026-03-23 16:47:55.398654 to 2026-03-24 16:47:55.4006
-#>   Received 286 observations in 0.444s
+#> GET ==> HNCK: 2026-03-23 16:56:54.640434 to 2026-03-24 16:56:54.642375
+#>   Received 286 observations in 0.325s
 
 obs
 #> # A tibble: 858 × 32
@@ -219,10 +219,10 @@ obs <- wn$get_measures_stations(
   end_time = now()
 )
 #> Fetching 2 stations
-#>   Done: 2/2 stations returned data in 0.5s
+#>   Done: 2/2 stations returned data in 0.6s
 
 obs
-#> # A tibble: 1,719 × 32
+#> # A tibble: 1,716 × 32
 #>       id station_id station_slug station_name latitude longitude elevation
 #>    <int> <chr>      <chr>        <chr>           <dbl>     <dbl>     <dbl>
 #>  1     7 ALTN       arlington    Arlington        43.3     -89.4       304
@@ -235,7 +235,7 @@ obs
 #>  8     7 ALTN       arlington    Arlington        43.3     -89.4       304
 #>  9     7 ALTN       arlington    Arlington        43.3     -89.4       304
 #> 10     7 ALTN       arlington    Arlington        43.3     -89.4       304
-#> # ℹ 1,709 more rows
+#> # ℹ 1,706 more rows
 #> # ℹ 25 more variables: location <chr>, station_timezone <chr>, city <chr>,
 #> #   county <chr>, region <chr>, state <chr>, earliest_api_date <date>,
 #> #   madis_id <chr>, climate_division <chr>, collection_time <int>, dttm <dttm>,
@@ -270,7 +270,7 @@ obs <- wn$get_measures_stations(
   end_time = ends
 )
 #> Fetching 2 stations
-#>   Done: 2/2 stations returned data in 0.3s
+#>   Done: 2/2 stations returned data in 0.5s
 
 obs
 #> # A tibble: 42 × 32
@@ -306,7 +306,7 @@ obs <- wn$get_measures_all(
   end_time = today()
 )
 #> Fetching 78 stations
-#>   Done: 78/78 stations returned data in 2.8s
+#> Parsing responses ■■■■■■■■■■■■■■■■                  49% |  ETA:  1sParsing responses ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   99% |  ETA:  0s                                                                     Done: 78/78 stations returned data in 3.6s
 
 obs
 #> # A tibble: 1,635 × 32
@@ -344,7 +344,7 @@ obs <- wn$get_measures_stations(
   end_time = now()
 )
 #> Fetching 2 stations
-#>   Done: 2/2 stations returned data in 0.6s
+#>   Done: 2/2 stations returned data in 0.7s
 
 select_obs <- obs |>
   select(station_id, dttm_local, date, standard_name, measure_value)

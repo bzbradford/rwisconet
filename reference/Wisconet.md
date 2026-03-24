@@ -17,8 +17,8 @@ more stations.
 
 - `timezone`:
 
-  Timezone used when parsing observation timestamps. Defaults to system
-  timezone.
+  Timezone used when parsing observation timestamps. Defaults to local
+  time for the mesonet ("America/Chicago").
 
 ## Methods
 
