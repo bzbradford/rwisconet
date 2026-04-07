@@ -15,10 +15,34 @@ more stations.
 
   Tibble of available field definitions, populated by `get_fields()`.
 
-- `timezone`:
+- `config`:
 
-  Timezone used when parsing observation timestamps. Defaults to local
-  time for the mesonet ("America/Chicago").
+  Named list of client configuration values:
+
+  `timezone`
+
+  :   Timezone for parsing observation timestamps. Default
+      `"America/Chicago"`.
+
+  `capacity`
+
+  :   Token-bucket capacity for request throttling. Default `20`.
+
+  `fill_time_s`
+
+  :   Seconds to refill the token bucket. Default `20`.
+
+  `max_tries`
+
+  :   Maximum retry attempts per request. Default `5`.
+
+  `max_concurrent`
+
+  :   Maximum parallel requests in `get_measures_stations()`. Default
+      `10`.
+
+  All values can be updated at any time, e.g.
+  `client$config$capacity <- 5`.
 
 ## Methods
 
@@ -50,7 +74,8 @@ more stations.
 
 ### Method `new()`
 
-Initializes the class.
+Initializes the class. Station and field metadata are fetched
+immediately when `fetch_on_init = TRUE`.
 
 #### Usage
 
@@ -60,8 +85,8 @@ Initializes the class.
 
 - `timezone`:
 
-  Character. Timezone for parsing observation timestamps. Defaults to
-  "America/Chicago".
+  Character. Timezone for parsing observation timestamps. Stored in
+  `config$timezone`. Defaults to `"America/Chicago"`.
 
 - `fetch_on_init`:
 
@@ -174,17 +199,11 @@ Fetch observations for a single station. Wrapper for
 
 Fetch observations for a specific set of stations in parallel.
 `start_time` may be a named list (keyed by `stn_id`) to use per-station
-start times.
+start times. Parallelism is controlled by `config$max_concurrent`.
 
 #### Usage
 
-    Wisconet$get_measures_stations(
-      stn_ids,
-      fields,
-      start_time,
-      end_time = now(),
-      max_concurrent = 10
-    )
+    Wisconet$get_measures_stations(stn_ids, fields, start_time, end_time = now())
 
 #### Arguments
 
@@ -205,10 +224,6 @@ start times.
 
   A `POSIXct` datetime for the end of the query window. Defaults to
   `now()`.
-
-- `max_concurrent`:
-
-  Integer. Maximum number of concurrent requests. Default `10`.
 
 ------------------------------------------------------------------------
 
@@ -250,7 +265,7 @@ package.
 
 ### Method [`print()`](https://rdrr.io/r/base/print.html)
 
-Prints a status message when the class is called without any arguments.
+Prints a status summary of the client, including current config values.
 
 #### Usage
 

@@ -52,8 +52,24 @@ available field definitions, and observation data for one or more stations.</p>
 <dd><p>Tibble of available field definitions, populated by <code>get_fields()</code>.</p></dd>
 
 
-<dt><code>timezone</code></dt>
-<dd><p>Timezone used when parsing observation timestamps. Defaults to local time for the mesonet ("America/Chicago").</p></dd>
+<dt><code>config</code></dt>
+<dd><p>Named list of client configuration values:</p><dl><dt><code>timezone</code></dt>
+<dd><p>Timezone for parsing observation timestamps. Default <code>"America/Chicago"</code>.</p></dd>
+
+<dt><code>capacity</code></dt>
+<dd><p>Token-bucket capacity for request throttling. Default <code>20</code>.</p></dd>
+
+<dt><code>fill_time_s</code></dt>
+<dd><p>Seconds to refill the token bucket. Default <code>20</code>.</p></dd>
+
+<dt><code>max_tries</code></dt>
+<dd><p>Maximum retry attempts per request. Default <code>5</code>.</p></dd>
+
+<dt><code>max_concurrent</code></dt>
+<dd><p>Maximum parallel requests in <code>get_measures_stations()</code>. Default <code>10</code>.</p></dd>
+
+
+</dl><p>All values can be updated at any time, e.g. <code>client$config$capacity &lt;- 5</code>.</p></dd>
 
 
 </dl><p></p></div>
@@ -77,7 +93,8 @@ available field definitions, and observation data for one or more stations.</p>
 <li><p><a href="#method-Wisconet-clone"><code>Wisconet$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-Wisconet-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
-<p>Initializes the class.</p><div class="section">
+<p>Initializes the class. Station and field metadata are fetched
+immediately when <code>fetch_on_init = TRUE</code>.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/Wisconet.html">Wisconet</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>timezone <span class="op">=</span> <span class="st">"America/Chicago"</span>, fetch_on_init <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -86,7 +103,7 @@ available field definitions, and observation data for one or more stations.</p>
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>timezone</code></dt>
 <dd><p>Character. Timezone for parsing observation timestamps.
-Defaults to "America/Chicago".</p></dd>
+Stored in <code>config$timezone</code>. Defaults to <code>"America/Chicago"</code>.</p></dd>
 
 
 <dt><code>fetch_on_init</code></dt>
@@ -197,15 +214,9 @@ Defaults to <code>now()</code>.</p></dd>
 <h3 id="method-get-measures-stations-">Method <code>get_measures_stations()</code><a class="anchor" aria-label="anchor" href="#method-get-measures-stations-"></a></h3>
 <p>Fetch observations for a specific set of stations in parallel.
 <code>start_time</code> may be a named list (keyed by <code>stn_id</code>) to use per-station
-start times.</p><div class="section">
+start times. Parallelism is controlled by <code>config$max_concurrent</code>.</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Wisconet</span><span class="op">$</span><span class="fu">get_measures_stations</span><span class="op">(</span></span>
-<span>  <span class="va">stn_ids</span>,</span>
-<span>  <span class="va">fields</span>,</span>
-<span>  <span class="va">start_time</span>,</span>
-<span>  end_time <span class="op">=</span> <span class="fu">now</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  max_concurrent <span class="op">=</span> <span class="fl">10</span></span>
-<span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Wisconet</span><span class="op">$</span><span class="fu">get_measures_stations</span><span class="op">(</span><span class="va">stn_ids</span>, <span class="va">fields</span>, <span class="va">start_time</span>, end_time <span class="op">=</span> <span class="fu">now</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -226,11 +237,6 @@ keyed by station ID for per-station start times.</p></dd>
 <dt><code>end_time</code></dt>
 <dd><p>A <code>POSIXct</code> datetime for the end of the query window.
 Defaults to <code>now()</code>.</p></dd>
-
-
-<dt><code>max_concurrent</code></dt>
-<dd><p>Integer. Maximum number of concurrent requests.
-Default <code>10</code>.</p></dd>
 
 
 </dl><p></p></div>
@@ -272,7 +278,7 @@ Requires the <span class="pkg">leaflet</span> package.</p><div class="section">
 
 </div><p></p><hr><a id="method-Wisconet-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
-<p>Prints a status message when the class is called without any arguments.</p><div class="section">
+<p>Prints a status summary of the client, including current config values.</p><div class="section">
 <h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Wisconet</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
