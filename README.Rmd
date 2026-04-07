@@ -37,10 +37,16 @@ wn <- Wisconet$new()
 wn
 ```
 
-You can skip the initial metadata fetch or use a different timezone. Normally you would not do this.
+You can skip the initial metadata fetch or use a different timezone, but normally you would leave the default settings.
 
 ```{r, eval=FALSE}
 wn <- Wisconet$new(timezone = "US/Eastern", fetch_on_init = FALSE)
+```
+
+The timezone is stored in for example `wn$config$timezone`. There are several other configuration options you can set that affect the throttling, concurrency, or retry behavior of API calls to Wisconet. Each can be set like `wn$config${config_name} <- {config_value}`, but default values should work fine. See all config options and values using `wn$print()`:
+
+```{r}
+wn$print()
 ```
 
 ### Explore stations
@@ -155,9 +161,9 @@ glimpse(obs)
 
 #### All active stations
 
-Use `get_measures_all()` to query every active station:
+Use `get_measures_all()` to query every active station. Note that this will hit the API throttle and may take a minute to resolve.
 
-```{r}
+```{r, eval=FALSE}
 obs <- wn$get_measures_all(
   fields = measures_daily,
   start_time = today() - days(3),
@@ -185,7 +191,7 @@ select_obs <- obs |>
 obs_wide <- select_obs |>
   pivot_wider(names_from = standard_name, values_from = measure_value)
 
-glimpse(obs_wide)
+obs_wide
 ```
 
 Generate a simple figure from the returned data:
@@ -203,17 +209,17 @@ select_obs |>
 Common tasks:
 
 ```{r dev, eval=FALSE}
-# run tests
-testthat::test_dir("tests")
-
-# build documentation
-devtools::document()
-
 # check package
 devtools::check()
 
 # build package
 devtools::build()
+
+# run tests
+testthat::test_dir("tests")
+
+# build documentation
+devtools::document()
 
 # build readme from Rmd
 devtools::build_readme()

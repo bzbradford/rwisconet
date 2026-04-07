@@ -8,8 +8,8 @@
 #' @export
 #'
 #' @importFrom R6 R6Class
-#' @importFrom httr2 request req_url_query req_error req_perform
-#'   req_perform_parallel resp_is_error resp_status resp_body_json
+#' @importFrom httr2 request req_url_query req_throttle req_retry req_error
+#'  req_perform req_perform_parallel resp_is_error resp_status resp_body_json
 #' @importFrom lubridate with_tz as_datetime as_date now mdy
 #' @importFrom tibble tibble as_tibble enframe
 #' @importFrom dplyr select any_of rename filter mutate left_join join_by
@@ -46,6 +46,11 @@ Wisconet <- R6Class(
     build_request = function(endpoint, query_params = list()) {
       request(private$build_url(endpoint)) |>
         req_url_query(!!!query_params) |>
+        req_throttle(
+          capacity = self$config$capacity,
+          fill_time_s = self$config$fill_time_s
+        ) |>
+        req_retry(max_tries = self$config$max_tries) |>
         req_error(is_error = ~FALSE)
     },
 
@@ -79,7 +84,7 @@ Wisconet <- R6Class(
         unnest_wider(value) |>
         mutate(
           dttm = as_datetime(collection_time),
-          dttm_local = with_tz(dttm, self$timezone),
+          dttm_local = with_tz(dttm, self$config$timezone),
           date = as_date(dttm_local),
           .after = collection_time
         ) |>
@@ -131,19 +136,34 @@ Wisconet <- R6Class(
     stations = NULL,
     #' @field fields Tibble of available field definitions, populated by `get_fields()`.
     fields = NULL,
-    #' @field timezone Timezone used when parsing observation timestamps. Defaults to local time for the mesonet ("America/Chicago").
-    timezone = NULL,
+    #' @field config Named list of client configuration values:
+    #'   \describe{
+    #'     \item{`timezone`}{Timezone for parsing observation timestamps. Default `"America/Chicago"`.}
+    #'     \item{`capacity`}{Token-bucket capacity for request throttling. Default `20`.}
+    #'     \item{`fill_time_s`}{Seconds to refill the token bucket. Default `20`.}
+    #'     \item{`max_tries`}{Maximum retry attempts per request. Default `5`.}
+    #'     \item{`max_concurrent`}{Maximum parallel requests in `get_measures_stations()`. Default `10`.}
+    #'   }
+    #'   All values can be updated at any time, e.g. `client$config$capacity <- 5`.
+    config = NULL,
 
     #' @description
-    #' Initializes the class.
+    #' Initializes the class. Station and field metadata are fetched
+    #' immediately when `fetch_on_init = TRUE`.
     #'
     #' @param timezone Character. Timezone for parsing observation timestamps.
-    #'   Defaults to "America/Chicago".
+    #'   Stored in `config$timezone`. Defaults to `"America/Chicago"`.
     #' @param fetch_on_init Logical. Whether to fetch station and field metadata
     #'   on initialization. Default `TRUE`.
     #'
     initialize = function(timezone = "America/Chicago", fetch_on_init = TRUE) {
-      self$timezone <- timezone
+      self$config <- list(
+        timezone = timezone,
+        capacity = 20,
+        fill_time_s = 20,
+        max_tries = 5,
+        max_concurrent = 10
+      )
       if (fetch_on_init) {
         self$get_stations()
         self$get_fields()
@@ -299,7 +319,7 @@ Wisconet <- R6Class(
     #' @description
     #' Fetch observations for a specific set of stations in parallel.
     #' `start_time` may be a named list (keyed by `stn_id`) to use per-station
-    #' start times.
+    #' start times. Parallelism is controlled by `config$max_concurrent`.
     #'
     #' @param stn_ids Character vector of station IDs to query.
     #' @param fields Character vector of field `standard_name` values to request.
@@ -307,15 +327,12 @@ Wisconet <- R6Class(
     #'   keyed by station ID for per-station start times.
     #' @param end_time A `POSIXct` datetime for the end of the query window.
     #'   Defaults to `now()`.
-    #' @param max_concurrent Integer. Maximum number of concurrent requests.
-    #'   Default `10`.
     #'
     get_measures_stations = function(
       stn_ids,
       fields,
       start_time,
-      end_time = now(),
-      max_concurrent = 10
+      end_time = now()
     ) {
       private$validate_inputs(stn_ids, fields)
 
@@ -364,7 +381,7 @@ Wisconet <- R6Class(
         reqs,
         on_error = "continue",
         progress = "Fetching station data",
-        max_active = max_concurrent
+        max_active = self$config$max_concurrent
       )
 
       results <- map2(
@@ -430,7 +447,7 @@ Wisconet <- R6Class(
     },
 
     #' @description
-    #' Prints a status message when the class is called without any arguments.
+    #' Prints a status summary of the client, including current config values.
     #'
     #' @param ... Ignored.
     #'
@@ -438,9 +455,12 @@ Wisconet <- R6Class(
       n_stns <- if (!is.null(self$stations)) nrow(self$stations) else "?"
       n_fields <- if (!is.null(self$fields)) nrow(self$fields) else "?"
       cat("<Wisconet API>\n")
-      cat("  Timezone:", self$timezone, "\n")
       cat("  Stations:", n_stns, "\n")
       cat("  Fields:", n_fields, "\n")
+      cat("  Config:\n")
+      lapply(names(self$config), function(nm) {
+        cat(paste0("    ", nm, ": ", self$config[[nm]], "\n"))
+      })
       invisible(self)
     }
   )

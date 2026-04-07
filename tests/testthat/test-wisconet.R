@@ -27,7 +27,7 @@ make_test_client <- function() {
 
 test_that("initialize sets timezone and skips fetch when fetch_on_init = FALSE", {
   w <- Wisconet$new(timezone = "US/Eastern", fetch_on_init = FALSE)
-  expect_equal(w$timezone, "US/Eastern")
+  expect_equal(w$config$timezone, "US/Eastern")
   expect_null(w$stations)
   expect_null(w$fields)
 })
@@ -225,13 +225,13 @@ test_that("print outputs expected format", {
   w <- make_test_client()
   output <- capture.output(w$print())
   expect_true(any(grepl("<Wisconet API>", output)))
-  expect_true(any(grepl("Timezone:", output)))
   expect_true(any(grepl("Stations:", output)))
   expect_true(any(grepl("Fields:", output)))
+  expect_true(any(grepl("Config:", output)))
 })
 
 test_that("print shows ? when metadata not loaded", {
-  w <- Wisconet$new(timezone = "US/Central", fetch_on_init = FALSE)
+  w <- Wisconet$new(fetch_on_init = FALSE)
   output <- capture.output(w$print())
   expect_true(any(grepl("Stations: \\?", output)))
   expect_true(any(grepl("Fields: \\?", output)))

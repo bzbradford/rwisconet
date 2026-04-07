@@ -15,7 +15,15 @@ available field definitions, and observation data for one or more stations.
 
 \item{\code{fields}}{Tibble of available field definitions, populated by \code{get_fields()}.}
 
-\item{\code{timezone}}{Timezone used when parsing observation timestamps. Defaults to local time for the mesonet ("America/Chicago").}
+\item{\code{config}}{Named list of client configuration values:
+\describe{
+\item{\code{timezone}}{Timezone for parsing observation timestamps. Default \code{"America/Chicago"}.}
+\item{\code{capacity}}{Token-bucket capacity for request throttling. Default \code{20}.}
+\item{\code{fill_time_s}}{Seconds to refill the token bucket. Default \code{20}.}
+\item{\code{max_tries}}{Maximum retry attempts per request. Default \code{5}.}
+\item{\code{max_concurrent}}{Maximum parallel requests in \code{get_measures_stations()}. Default \code{10}.}
+}
+All values can be updated at any time, e.g. \code{client$config$capacity <- 5}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -39,7 +47,8 @@ available field definitions, and observation data for one or more stations.
 \if{html}{\out{<a id="method-Wisconet-new"></a>}}
 \if{latex}{\out{\hypertarget{method-Wisconet-new}{}}}
 \subsection{Method \code{new()}}{
-Initializes the class.
+Initializes the class. Station and field metadata are fetched
+immediately when \code{fetch_on_init = TRUE}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Wisconet$new(timezone = "America/Chicago", fetch_on_init = TRUE)}\if{html}{\out{</div>}}
 }
@@ -48,7 +57,7 @@ Initializes the class.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{timezone}}{Character. Timezone for parsing observation timestamps.
-Defaults to "America/Chicago".}
+Stored in \code{config$timezone}. Defaults to \code{"America/Chicago"}.}
 
 \item{\code{fetch_on_init}}{Logical. Whether to fetch station and field metadata
 on initialization. Default \code{TRUE}.}
@@ -153,15 +162,9 @@ Defaults to \code{now()}.}
 \subsection{Method \code{get_measures_stations()}}{
 Fetch observations for a specific set of stations in parallel.
 \code{start_time} may be a named list (keyed by \code{stn_id}) to use per-station
-start times.
+start times. Parallelism is controlled by \code{config$max_concurrent}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Wisconet$get_measures_stations(
-  stn_ids,
-  fields,
-  start_time,
-  end_time = now(),
-  max_concurrent = 10
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Wisconet$get_measures_stations(stn_ids, fields, start_time, end_time = now())}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -176,9 +179,6 @@ keyed by station ID for per-station start times.}
 
 \item{\code{end_time}}{A \code{POSIXct} datetime for the end of the query window.
 Defaults to \code{now()}.}
-
-\item{\code{max_concurrent}}{Integer. Maximum number of concurrent requests.
-Default \code{10}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -220,7 +220,7 @@ Requires the \pkg{leaflet} package.
 \if{html}{\out{<a id="method-Wisconet-print"></a>}}
 \if{latex}{\out{\hypertarget{method-Wisconet-print}{}}}
 \subsection{Method \code{print()}}{
-Prints a status message when the class is called without any arguments.
+Prints a status summary of the client, including current config values.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Wisconet$print(...)}\if{html}{\out{</div>}}
 }
