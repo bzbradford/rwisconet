@@ -64,8 +64,6 @@ more stations.
 
 - [`Wisconet$get_measures_all()`](#method-Wisconet-get_measures_all)
 
-- [`Wisconet$map_stations()`](#method-Wisconet-map_stations)
-
 - [`Wisconet$print()`](#method-Wisconet-print)
 
 - [`Wisconet$clone()`](#method-Wisconet-clone)
@@ -249,17 +247,6 @@ Fetch observations for all active stations in parallel.
 
   A `POSIXct` datetime for the end of the query window. Defaults to
   `now()`.
-
-------------------------------------------------------------------------
-
-### Method `map_stations()`
-
-Display all stations on an interactive leaflet map. Requires the leaflet
-package.
-
-#### Usage
-
-    Wisconet$map_stations()
 
 ------------------------------------------------------------------------
 
