@@ -38,7 +38,6 @@ All values can be updated at any time, e.g. \code{client$config$capacity <- 5}.}
 \item \href{#method-Wisconet-get_measures}{\code{Wisconet$get_measures()}}
 \item \href{#method-Wisconet-get_measures_stations}{\code{Wisconet$get_measures_stations()}}
 \item \href{#method-Wisconet-get_measures_all}{\code{Wisconet$get_measures_all()}}
-\item \href{#method-Wisconet-map_stations}{\code{Wisconet$map_stations()}}
 \item \href{#method-Wisconet-print}{\code{Wisconet$print()}}
 \item \href{#method-Wisconet-clone}{\code{Wisconet$clone()}}
 }
@@ -204,17 +203,6 @@ Defaults to \code{now()}.}
 }
 \if{html}{\out{</div>}}
 }
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Wisconet-map_stations"></a>}}
-\if{latex}{\out{\hypertarget{method-Wisconet-map_stations}{}}}
-\subsection{Method \code{map_stations()}}{
-Display all stations on an interactive leaflet map.
-Requires the \pkg{leaflet} package.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Wisconet$map_stations()}\if{html}{\out{</div>}}
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Wisconet-print"></a>}}

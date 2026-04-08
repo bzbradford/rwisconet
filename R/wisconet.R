@@ -50,7 +50,10 @@ Wisconet <- R6Class(
           capacity = self$config$capacity,
           fill_time_s = self$config$fill_time_s
         ) |>
-        req_retry(max_tries = self$config$max_tries) |>
+        req_retry(
+          max_tries = self$config$max_tries,
+          is_transient = \(resp) resp_status(resp) %in% c(429, 503, 504)
+        ) |>
         req_error(is_error = ~FALSE)
     },
 
@@ -423,27 +426,6 @@ Wisconet <- R6Class(
       stn_ids <- active_stns$station_id
 
       self$get_measures_stations(stn_ids, fields, start_time, end_time)
-    },
-
-    #' @description Display all stations on an interactive leaflet map.
-    #'   Requires the \pkg{leaflet} package.
-    #'
-    map_stations = function() {
-      if (!requireNamespace("leaflet", quietly = TRUE)) {
-        stop(
-          "Package 'leaflet' is required for map_stations(). Install it with: install.packages('leaflet')"
-        )
-      }
-      if (is.null(self$stations)) {
-        self$get_stations()
-      }
-      leaflet::leaflet(self$stations) |>
-        leaflet::addTiles() |>
-        leaflet::addMarkers(
-          lng = ~longitude,
-          lat = ~latitude,
-          label = ~ paste0(station_id, ": ", station_name)
-        )
     },
 
     #' @description

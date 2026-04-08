@@ -24,17 +24,8 @@ date/time ranges and the conversion of UTC to local time.
 suppressPackageStartupMessages(library(tidyverse))
 library(rwisconet)
 
+# initialize the connection
 wn <- Wisconet$new()
-wn
-#> <Wisconet API>
-#>   Stations: 78 
-#>   Fields: 253 
-#>   Config:
-#>     timezone: America/Chicago
-#>     capacity: 20
-#>     fill_time_s: 20
-#>     max_tries: 5
-#>     max_concurrent: 10
 ```
 
 You can skip the initial metadata fetch or use a different timezone, but
@@ -44,15 +35,18 @@ normally you would leave the default settings.
 wn <- Wisconet$new(timezone = "US/Eastern", fetch_on_init = FALSE)
 ```
 
-The timezone is stored in for example `wn$config$timezone`. There are
+### Configuration
+
+Several configutation options are available in the `wn$config` object.
+For example, the timezone is stored in `wn$config$timezone`. There are
 several other configuration options you can set that affect the
 throttling, concurrency, or retry behavior of API calls to Wisconet.
 Each can be set like `wn$config${config_name} <- {config_value}`, but
-default values should work fine. See all config options and values using
-`wn$print()`:
+default values should work fine. See all config options and values by
+executing `wn` or `wn$print()`:
 
 ``` r
-wn$print()
+wn
 #> <Wisconet API>
 #>   Stations: 78 
 #>   Fields: 253 
@@ -70,7 +64,10 @@ The station metadata table is stored in `wn$stations`. You can refresh
 it at any time with `wn$get_stations()`.
 
 ``` r
+# extract the stations table
 stns <- wn$stations
+
+# view it
 glimpse(stns)
 #> Rows: 78
 #> Columns: 15
@@ -94,6 +91,7 @@ glimpse(stns)
 Find the nearest station(s) to a given point:
 
 ``` r
+# will return the nearest 3 stations to this point and the distance
 wn$find_nearest_station(lat = 43.07, lng = -89.40, n = 3)
 #> # A tibble: 3 × 5
 #>   station_id station_name latitude longitude dist_km
@@ -109,7 +107,15 @@ package):
 ``` r
 library(leaflet)
 
-wn$map_stations()
+# create a leaflet map
+leaflet(wn$stations) |>
+  addTiles() |>
+  addMarkers(
+    lng = ~longitude,
+    lat = ~latitude,
+    # on mouse hover points will show station id and name
+    label = ~ paste0(station_id, ": ", station_name)
+  )
 ```
 
 ### Explore available fields
@@ -216,21 +222,24 @@ Returned data is formatted as `tibble` with station and measure
 metadata.
 
 ``` r
+# fields to download
 measures_5min <- c(
   "5min_air_temp_f_avg",
   "5min_relative_humidity_pct_avg",
   "5min_wind_speed_mph_avg"
 )
 
+# run the query
 obs <- wn$get_measures(
   stn_id = "HNCK", # Hancock
   fields = measures_5min,
   start_time = now() - days(1),
   end_time = now()
 )
-#> GET ==> HNCK: 2026-04-06 10:17:11.768991 to 2026-04-07 10:17:11.770945
-#>   Received 286 observations in 3.272s
+#> GET ==> HNCK: 2026-04-07 12:37:40.451894 to 2026-04-08 12:37:40.453854
+#>   Received 286 observations in 2.224s
 
+# view results
 glimpse(obs)
 #> Rows: 858
 #> Columns: 31
@@ -249,12 +258,12 @@ glimpse(obs)
 #> $ earliest_api_date    <date> 2023-02-02, 2023-02-02, 2023-02-02, 2023-02-02, …
 #> $ madis_id             <chr> "WIHCK", "WIHCK", "WIHCK", "WIHCK", "WIHCK", "WIH…
 #> $ climate_division     <chr> "Central", "Central", "Central", "Central", "Cent…
-#> $ collection_time      <int> 1775488800, 1775488800, 1775488800, 1775489100, 1…
-#> $ dttm                 <dttm> 2026-04-06 15:20:00, 2026-04-06 15:20:00, 2026-0…
-#> $ dttm_local           <dttm> 2026-04-06 10:20:00, 2026-04-06 10:20:00, 2026-0…
-#> $ date                 <date> 2026-04-06, 2026-04-06, 2026-04-06, 2026-04-06, …
+#> $ collection_time      <int> 1775583600, 1775583600, 1775583600, 1775583900, 1…
+#> $ dttm                 <dttm> 2026-04-07 17:40:00, 2026-04-07 17:40:00, 2026-0…
+#> $ dttm_local           <dttm> 2026-04-07 12:40:00, 2026-04-07 12:40:00, 2026-0…
+#> $ date                 <date> 2026-04-07, 2026-04-07, 2026-04-07, 2026-04-07, …
 #> $ measure_id           <int> 1, 18, 55, 1, 18, 55, 1, 18, 55, 1, 18, 55, 1, 18…
-#> $ measure_value        <dbl> 40.9, 61.0, 10.8, 40.6, 60.6, 10.7, 39.9, 57.9, 1…
+#> $ measure_value        <dbl> 35.3, 29.2, 4.1, 35.6, 30.3, 5.1, 35.8, 29.5, 4.0…
 #> $ standard_name        <chr> "5min_air_temp_f_avg", "5min_relative_humidity_pc…
 #> $ measure_type         <chr> "Air Temp", "Relative Humidity", "Wind Speed", "A…
 #> $ qualifier            <chr> "avg", "avg", "avg", "avg", "avg", "avg", "avg", …
@@ -273,6 +282,7 @@ Use `get_measures_stations()` to fetch data for a specific set of
 stations in parallel:
 
 ``` r
+# run the query
 obs <- wn$get_measures_stations(
   stn_ids = c("ALTN", "HNCK"), # Arlington, Hancock
   fields = measures_5min,
@@ -280,8 +290,9 @@ obs <- wn$get_measures_stations(
   end_time = now()
 )
 #> Fetching 2 stations
-#>   Done: 2/2 stations returned data in 2.0s
+#> Done: 2/2 stations returned data in 2.1s
 
+# view results
 glimpse(obs)
 #> Rows: 1,719
 #> Columns: 31
@@ -300,12 +311,12 @@ glimpse(obs)
 #> $ earliest_api_date    <date> 2023-05-22, 2023-05-22, 2023-05-22, 2023-05-22, …
 #> $ madis_id             <chr> "WIALT", "WIALT", "WIALT", "WIALT", "WIALT", "WIA…
 #> $ climate_division     <chr> "South Central", "South Central", "South Central"…
-#> $ collection_time      <int> 1775488800, 1775488800, 1775488800, 1775489100, 1…
-#> $ dttm                 <dttm> 2026-04-06 15:20:00, 2026-04-06 15:20:00, 2026-0…
-#> $ dttm_local           <dttm> 2026-04-06 10:20:00, 2026-04-06 10:20:00, 2026-0…
-#> $ date                 <date> 2026-04-06, 2026-04-06, 2026-04-06, 2026-04-06, …
+#> $ collection_time      <int> 1775583600, 1775583600, 1775583600, 1775583900, 1…
+#> $ dttm                 <dttm> 2026-04-07 17:40:00, 2026-04-07 17:40:00, 2026-0…
+#> $ dttm_local           <dttm> 2026-04-07 12:40:00, 2026-04-07 12:40:00, 2026-0…
+#> $ date                 <date> 2026-04-07, 2026-04-07, 2026-04-07, 2026-04-07, …
 #> $ measure_id           <int> 1, 18, 55, 1, 18, 55, 1, 18, 55, 1, 18, 55, 1, 18…
-#> $ measure_value        <dbl> 40.4, 70.5, 14.8, 40.3, 72.7, 12.3, 40.7, 72.5, 1…
+#> $ measure_value        <dbl> 34.7, 31.9, 7.4, 35.0, 30.9, 5.4, 34.8, 31.4, 5.6…
 #> $ standard_name        <chr> "5min_air_temp_f_avg", "5min_relative_humidity_pc…
 #> $ measure_type         <chr> "Air Temp", "Relative Humidity", "Wind Speed", "A…
 #> $ qualifier            <chr> "avg", "avg", "avg", "avg", "avg", "avg", "avg", …
@@ -324,19 +335,23 @@ You can also pass a named list of per-station start and end times if you
 need to collect data for different timeframes by station.
 
 ``` r
+# fields to download
 measures_daily <- c(
   "daily_air_temp_f_min",
   "daily_air_temp_f_avg",
   "daily_air_temp_f_max"
 )
 
+# set start times
 starts <- list(
   ALTN = now() - months(2),
   HNCK = now() - months(1)
 )
 
+# set end times for each station 7 days from start time
 ends <- lapply(starts, \(x) x + days(7))
 
+# run the query
 obs <- wn$get_measures_stations(
   stn_ids = names(starts),
   fields = measures_daily,
@@ -344,8 +359,9 @@ obs <- wn$get_measures_stations(
   end_time = ends
 )
 #> Fetching 2 stations
-#>   Done: 2/2 stations returned data in 1.1s
+#> Done: 2/2 stations returned data in 2.7s
 
+# show results
 glimpse(obs)
 #> Rows: 42
 #> Columns: 31
@@ -364,12 +380,12 @@ glimpse(obs)
 #> $ earliest_api_date    <date> 2023-05-22, 2023-05-22, 2023-05-22, 2023-05-22, …
 #> $ madis_id             <chr> "WIALT", "WIALT", "WIALT", "WIALT", "WIALT", "WIA…
 #> $ climate_division     <chr> "South Central", "South Central", "South Central"…
-#> $ collection_time      <int> 1770530400, 1770530400, 1770530400, 1770616800, 1…
-#> $ dttm                 <dttm> 2026-02-08 06:00:00, 2026-02-08 06:00:00, 2026-0…
-#> $ dttm_local           <dttm> 2026-02-08, 2026-02-08, 2026-02-08, 2026-02-09, …
-#> $ date                 <date> 2026-02-08, 2026-02-08, 2026-02-08, 2026-02-09, …
+#> $ collection_time      <int> 1770616800, 1770616800, 1770616800, 1770703200, 1…
+#> $ dttm                 <dttm> 2026-02-09 06:00:00, 2026-02-09 06:00:00, 2026-0…
+#> $ dttm_local           <dttm> 2026-02-09, 2026-02-09, 2026-02-09, 2026-02-10, …
+#> $ date                 <date> 2026-02-09, 2026-02-09, 2026-02-09, 2026-02-10, …
 #> $ measure_id           <int> 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4…
-#> $ measure_value        <dbl> 12.6, 17.6, 2.8, 22.1, 27.0, 15.6, 27.1, 34.2, 15…
+#> $ measure_value        <dbl> 22.1, 27.0, 15.6, 27.1, 34.2, 15.8, 32.9, 38.7, 2…
 #> $ standard_name        <chr> "daily_air_temp_f_avg", "daily_air_temp_f_max", "…
 #> $ measure_type         <chr> "Air Temp", "Air Temp", "Air Temp", "Air Temp", "…
 #> $ qualifier            <chr> "avg", "max", "min", "avg", "max", "min", "avg", …
@@ -388,13 +404,50 @@ Use `get_measures_all()` to query every active station. Note that this
 will hit the API throttle and may take a minute to resolve.
 
 ``` r
+# run the query
 obs <- wn$get_measures_all(
   fields = measures_daily,
   start_time = today() - days(3),
   end_time = today()
 )
+#> Fetching 78 stations
+#> Done: 78/78 stations returned data in 63.1s
 
+# show results
 glimpse(obs)
+#> Rows: 684
+#> Columns: 31
+#> $ station_id           <chr> "ANGO", "ANGO", "ANGO", "ANGO", "ANGO", "ANGO", "…
+#> $ station_slug         <chr> "antigo", "antigo", "antigo", "antigo", "antigo",…
+#> $ station_name         <chr> "Antigo", "Antigo", "Antigo", "Antigo", "Antigo",…
+#> $ latitude             <dbl> 45.1589, 45.1589, 45.1589, 45.1589, 45.1589, 45.1…
+#> $ longitude            <dbl> -89.1178, -89.1178, -89.1178, -89.1178, -89.1178,…
+#> $ elevation            <dbl> 461, 461, 461, 461, 461, 461, 461, 461, 461, 304,…
+#> $ location             <chr> "Langlade County Airport", "Langlade County Airpo…
+#> $ station_timezone     <chr> "US/Central", "US/Central", "US/Central", "US/Cen…
+#> $ city                 <chr> "Antigo", "Antigo", "Antigo", "Antigo", "Antigo",…
+#> $ county               <chr> "Langlade", "Langlade", "Langlade", "Langlade", "…
+#> $ region               <chr> "Northeast", "Northeast", "Northeast", "Northeast…
+#> $ state                <chr> "WI", "WI", "WI", "WI", "WI", "WI", "WI", "WI", "…
+#> $ earliest_api_date    <date> 2024-09-11, 2024-09-11, 2024-09-11, 2024-09-11, …
+#> $ madis_id             <chr> "WIANT", "WIANT", "WIANT", "WIANT", "WIANT", "WIA…
+#> $ climate_division     <chr> "Northeast", "Northeast", "Northeast", "Northeast…
+#> $ collection_time      <int> 1775365200, 1775365200, 1775365200, 1775451600, 1…
+#> $ dttm                 <dttm> 2026-04-05 05:00:00, 2026-04-05 05:00:00, 2026-0…
+#> $ dttm_local           <dttm> 2026-04-05, 2026-04-05, 2026-04-05, 2026-04-06, …
+#> $ date                 <date> 2026-04-05, 2026-04-05, 2026-04-05, 2026-04-06, …
+#> $ measure_id           <int> 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4…
+#> $ measure_value        <dbl> 32.5, 37.2, 29.7, 35.2, 45.3, 27.0, 30.6, 36.1, 1…
+#> $ standard_name        <chr> "daily_air_temp_f_avg", "daily_air_temp_f_max", "…
+#> $ measure_type         <chr> "Air Temp", "Air Temp", "Air Temp", "Air Temp", "…
+#> $ qualifier            <chr> "avg", "max", "min", "avg", "max", "min", "avg", …
+#> $ source_field         <chr> "WN_calc", "airtemp_c_max@Table24", "airtemp_c_mi…
+#> $ data_type            <chr> "float", "float", "float", "float", "float", "flo…
+#> $ source_units         <chr> "celsius", "celsius", "celsius", "celsius", "cels…
+#> $ final_units          <chr> "fahrenheit", "fahrenheit", "fahrenheit", "fahren…
+#> $ units_abbrev         <chr> "f", "f", "f", "f", "f", "f", "f", "f", "f", "f",…
+#> $ conversion_type      <chr> "c2f", "c2f", "c2f", "c2f", "c2f", "c2f", "c2f", …
+#> $ collection_frequency <chr> "daily", "daily", "daily", "daily", "daily", "dai…
 ```
 
 ### Handling received data
@@ -403,6 +456,7 @@ You can simplify the returned data by selecting only a few important
 data columns.
 
 ``` r
+# run the query
 obs <- wn$get_measures_stations(
   stn_ids = c("ALTN", "HNCK"), # Arlington, Hancock
   fields = measures_daily,
@@ -410,28 +464,31 @@ obs <- wn$get_measures_stations(
   end_time = now()
 )
 #> Fetching 2 stations
-#> Fetching station data ■■■■■■■■■■■■■■■■                  50% | ETA:  2s                                                                        Done: 2/2 stations returned data in 2.1s
+#> Done: 2/2 stations returned data in 3.4s
 
+# select a few specific columns
 select_obs <- obs |>
   select(station_id, dttm_local, date, standard_name, measure_value)
 
+# pivot to wide format
 obs_wide <- select_obs |>
   pivot_wider(names_from = standard_name, values_from = measure_value)
 
+# view data
 obs_wide
 #> # A tibble: 62 × 6
 #>    station_id dttm_local          date       daily_air_temp_f_avg
 #>    <chr>      <dttm>              <date>                    <dbl>
-#>  1 ALTN       2026-03-08 00:00:00 2026-03-08                 44.8
-#>  2 ALTN       2026-03-09 00:00:00 2026-03-09                 43.7
-#>  3 ALTN       2026-03-10 00:00:00 2026-03-10                 53.6
-#>  4 ALTN       2026-03-11 00:00:00 2026-03-11                 39.6
-#>  5 ALTN       2026-03-12 00:00:00 2026-03-12                 32.2
-#>  6 ALTN       2026-03-13 00:00:00 2026-03-13                 34  
-#>  7 ALTN       2026-03-14 00:00:00 2026-03-14                 36.1
-#>  8 ALTN       2026-03-15 00:00:00 2026-03-15                 28.9
-#>  9 ALTN       2026-03-16 00:00:00 2026-03-16                 29.1
-#> 10 ALTN       2026-03-17 00:00:00 2026-03-17                 19.9
+#>  1 ALTN       2026-03-09 00:00:00 2026-03-09                 43.7
+#>  2 ALTN       2026-03-10 00:00:00 2026-03-10                 53.6
+#>  3 ALTN       2026-03-11 00:00:00 2026-03-11                 39.6
+#>  4 ALTN       2026-03-12 00:00:00 2026-03-12                 32.2
+#>  5 ALTN       2026-03-13 00:00:00 2026-03-13                 34  
+#>  6 ALTN       2026-03-14 00:00:00 2026-03-14                 36.1
+#>  7 ALTN       2026-03-15 00:00:00 2026-03-15                 28.9
+#>  8 ALTN       2026-03-16 00:00:00 2026-03-16                 29.1
+#>  9 ALTN       2026-03-17 00:00:00 2026-03-17                 19.9
+#> 10 ALTN       2026-03-18 00:00:00 2026-03-18                 12.9
 #> # ℹ 52 more rows
 #> # ℹ 2 more variables: daily_air_temp_f_max <dbl>, daily_air_temp_f_min <dbl>
 ```
@@ -439,6 +496,7 @@ obs_wide
 Generate a simple figure from the returned data:
 
 ``` r
+# plot the data (in long form) from above
 select_obs |>
   ggplot(aes(x = dttm_local, y = measure_value, color = standard_name)) +
   geom_line() +

@@ -33,8 +33,8 @@ Creating a new client automatically fetches station and field metadata from the 
 suppressPackageStartupMessages(library(tidyverse))
 library(rwisconet)
 
+# initialize the connection
 wn <- Wisconet$new()
-wn
 ```
 
 You can skip the initial metadata fetch or use a different timezone, but normally you would leave the default settings.
@@ -43,10 +43,12 @@ You can skip the initial metadata fetch or use a different timezone, but normall
 wn <- Wisconet$new(timezone = "US/Eastern", fetch_on_init = FALSE)
 ```
 
-The timezone is stored in for example `wn$config$timezone`. There are several other configuration options you can set that affect the throttling, concurrency, or retry behavior of API calls to Wisconet. Each can be set like `wn$config${config_name} <- {config_value}`, but default values should work fine. See all config options and values using `wn$print()`:
+### Configuration
+
+Several configutation options are available in the `wn$config` object. For example, the timezone is stored in  `wn$config$timezone`. There are several other configuration options you can set that affect the throttling, concurrency, or retry behavior of API calls to Wisconet. Each can be set like `wn$config${config_name} <- {config_value}`, but default values should work fine. See all config options and values by executing `wn` or `wn$print()`:
 
 ```{r}
-wn$print()
+wn
 ```
 
 ### Explore stations
@@ -54,13 +56,17 @@ wn$print()
 The station metadata table is stored in `wn$stations`. You can refresh it at any time with `wn$get_stations()`.
 
 ```{r}
+# extract the stations table
 stns <- wn$stations
+
+# view it
 glimpse(stns)
 ```
 
 Find the nearest station(s) to a given point:
 
 ```{r}
+# will return the nearest 3 stations to this point and the distance
 wn$find_nearest_station(lat = 43.07, lng = -89.40, n = 3)
 ```
 
@@ -69,7 +75,15 @@ Display all stations on an interactive map (requires the `leaflet` package):
 ```{r, eval=FALSE}
 library(leaflet)
 
-wn$map_stations()
+# create a leaflet map
+leaflet(wn$stations) |>
+  addTiles() |>
+  addMarkers(
+    lng = ~longitude,
+    lat = ~latitude,
+    # on mouse hover points will show station id and name
+    label = ~ paste0(station_id, ": ", station_name)
+  )
 ```
 
 ### Explore available fields
@@ -100,12 +114,14 @@ wn$find_fields(type = "Air Temp", freq = "5min")
 Use `get_measures()` to fetch data for one station. Provide a station ID, a vector of field `standard_name` values, and a time window. Returned data is formatted as `tibble` with station and measure metadata. 
 
 ```{r}
+# fields to download
 measures_5min <- c(
   "5min_air_temp_f_avg",
   "5min_relative_humidity_pct_avg",
   "5min_wind_speed_mph_avg"
 )
 
+# run the query
 obs <- wn$get_measures(
   stn_id = "HNCK", # Hancock
   fields = measures_5min,
@@ -113,6 +129,7 @@ obs <- wn$get_measures(
   end_time = now()
 )
 
+# view results
 glimpse(obs)
 ```
 
@@ -121,6 +138,7 @@ glimpse(obs)
 Use `get_measures_stations()` to fetch data for a specific set of stations in parallel:
 
 ```{r}
+# run the query
 obs <- wn$get_measures_stations(
   stn_ids = c("ALTN", "HNCK"), # Arlington, Hancock
   fields = measures_5min,
@@ -128,6 +146,7 @@ obs <- wn$get_measures_stations(
   end_time = now()
 )
 
+# view results
 glimpse(obs)
 ```
 
@@ -136,19 +155,23 @@ glimpse(obs)
 You can also pass a named list of per-station start and end times if you need to collect data for different timeframes by station.
 
 ```{r}
+# fields to download
 measures_daily <- c(
   "daily_air_temp_f_min",
   "daily_air_temp_f_avg",
   "daily_air_temp_f_max"
 )
 
+# set start times
 starts <- list(
   ALTN = now() - months(2),
   HNCK = now() - months(1)
 )
 
+# set end times for each station 7 days from start time
 ends <- lapply(starts, \(x) x + days(7))
 
+# run the query
 obs <- wn$get_measures_stations(
   stn_ids = names(starts),
   fields = measures_daily,
@@ -156,6 +179,7 @@ obs <- wn$get_measures_stations(
   end_time = ends
 )
 
+# show results
 glimpse(obs)
 ```
 
@@ -163,13 +187,15 @@ glimpse(obs)
 
 Use `get_measures_all()` to query every active station. Note that this will hit the API throttle and may take a minute to resolve.
 
-```{r, eval=FALSE}
+```{r}
+# run the query
 obs <- wn$get_measures_all(
   fields = measures_daily,
   start_time = today() - days(3),
   end_time = today()
 )
 
+# show results
 glimpse(obs)
 ```
 
@@ -178,6 +204,7 @@ glimpse(obs)
 You can simplify the returned data by selecting only a few important data columns.
 
 ```{r}
+# run the query
 obs <- wn$get_measures_stations(
   stn_ids = c("ALTN", "HNCK"), # Arlington, Hancock
   fields = measures_daily,
@@ -185,18 +212,22 @@ obs <- wn$get_measures_stations(
   end_time = now()
 )
 
+# select a few specific columns
 select_obs <- obs |>
   select(station_id, dttm_local, date, standard_name, measure_value)
 
+# pivot to wide format
 obs_wide <- select_obs |>
   pivot_wider(names_from = standard_name, values_from = measure_value)
 
+# view data
 obs_wide
 ```
 
 Generate a simple figure from the returned data:
 
 ```{r fig}
+# plot the data (in long form) from above
 select_obs |>
   ggplot(aes(x = dttm_local, y = measure_value, color = standard_name)) +
   geom_line() +
