@@ -109,9 +109,13 @@ wn$find_fields(type = "Air Temp", freq = "5min")
 
 ### Fetch observations
 
-#### Single station
+#### Note on dates and times
 
-Use `get_measures()` to fetch data for one station. Provide a station ID, a vector of field `standard_name` values, and a time window. Returned data is formatted as `tibble` with station and measure metadata. 
+The examples below use `lubridate` functions for convenient date or time ranges for pulling data from Wisconet. The `today()` function returns today's date, the `now()` function returns the current date and time. You can also set the start or end date specifically using the format "YYYY-MM-DD" like `start_date = "2026-01-01"`. To specify a start/end time, use the format "YYYY-MM-DD HH:MM:SS" using 24-hour notation, like "2026-01-01 12:00:00" for noon. Times are assumed to be in US Central time unless the `timezone` option has been changed.  If you use a date and don't specify a time, it will return the entire day.
+
+#### Get data for a single station
+
+Use `get_measures()` to fetch data for one station. Provide a station ID, a vector of field `standard_name` values, and a time window. Returned data is formatted as `tibble` with station and measure metadata.
 
 ```{r}
 # fields to download
@@ -133,9 +137,24 @@ obs <- wn$get_measures(
 glimpse(obs)
 ```
 
-#### Multiple stations
+Or, use a specific date/time range. Format like "YYYY-MM-DD" or "YYYY-MM-DD HH:MM:SS" (using 24 hour time). If time is ommitted it assumes you want the full day (midnight - midnight local time).
 
-Use `get_measures_stations()` to fetch data for a specific set of stations in parallel:
+```{r}
+# specific time range
+obs <- wn$get_measures(
+  stn_id = "HNCK", # Hancock
+  fields = measures_5min,
+  start_time = "2026-01-01 00:00:00",
+  end_time = "2026-01-01 12:00:00"
+)
+
+# view results
+glimpse(obs)
+```
+
+#### Get data from multiple stations
+
+Use `get_measures_stations()` to fetch data for a specific set of stations in parallel. Note if you want data from all stations, see the use of `get_measures_all()` below.
 
 ```{r}
 # run the query
@@ -150,7 +169,7 @@ obs <- wn$get_measures_stations(
 glimpse(obs)
 ```
 
-#### Specific start/end times per station
+#### Use specific start/end times per station
 
 You can also pass a named list of per-station start and end times if you need to collect data for different timeframes by station.
 
@@ -183,7 +202,7 @@ obs <- wn$get_measures_stations(
 glimpse(obs)
 ```
 
-#### All active stations
+#### Get data from all active stations
 
 Use `get_measures_all()` to query every active station. Note that this will hit the API throttle and may take a minute to resolve.
 
@@ -240,21 +259,21 @@ select_obs |>
 Common tasks:
 
 ```{r dev, eval=FALSE}
+# run tests
+testthat::test_dir("tests")
+
+# build readme from Rmd
+devtools::build_readme()
+
+# build documentation
+devtools::document()
+
 # check package
 devtools::check()
 
 # build package
 devtools::build()
 
-# run tests
-testthat::test_dir("tests")
-
-# build documentation
-devtools::document()
-
-# build readme from Rmd
-devtools::build_readme()
-
-# build a pdf manual
+# build a pdf manual (optional)
 devtools::build_manual()
 ```

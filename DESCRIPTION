@@ -1,6 +1,6 @@
 Package: rwisconet
 Title: Wisconet API v1 Wrapper
-Version: 0.1.1
+Version: 0.1.2
 URL: https://bzbradford.github.io/rwisconet/
 Authors@R: 
     person("Ben", "Bradford", email = "bbradford@wisc.edu", role = c("aut", "cre"))
