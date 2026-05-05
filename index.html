@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">rwisconet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,8 +78,8 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wn</span></span>
 <span><span class="co">#&gt; &lt;Wisconet API&gt;</span></span>
-<span><span class="co">#&gt;   Stations: 78 </span></span>
-<span><span class="co">#&gt;   Fields: 253 </span></span>
+<span><span class="co">#&gt;   Stations: 79 </span></span>
+<span><span class="co">#&gt;   Fields: 264 </span></span>
 <span><span class="co">#&gt;   Config:</span></span>
 <span><span class="co">#&gt;     timezone: America/Chicago</span></span>
 <span><span class="co">#&gt;     capacity: 20</span></span>
@@ -97,7 +97,7 @@
 <span></span>
 <span><span class="co"># view it</span></span>
 <span><span class="fu">glimpse</span><span class="op">(</span><span class="va">stns</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Rows: 78</span></span>
+<span><span class="co">#&gt; Rows: 79</span></span>
 <span><span class="co">#&gt; Columns: 15</span></span>
 <span><span class="co">#&gt; $ station_id        &lt;chr&gt; "ANGO", "ALTN", "RTHR", "BBCK", "BYFD", "BLCR", "WCR…</span></span>
 <span><span class="co">#&gt; $ station_slug      &lt;chr&gt; "antigo", "arlington", "arthur", "babcock", "bayfiel…</span></span>
@@ -129,9 +129,9 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/" class="external-link">leaflet</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># create a leaflet map</span></span>
-<span><span class="fu"><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span><span class="va">wn</span><span class="op">$</span><span class="va">stations</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">addTiles</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">addMarkers</a></span><span class="op">(</span></span>
+<span><span class="fu">leaflet</span><span class="op">(</span><span class="va">wn</span><span class="op">$</span><span class="va">stations</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">addTiles</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">addMarkers</span><span class="op">(</span></span>
 <span>    lng <span class="op">=</span> <span class="op">~</span><span class="va">longitude</span>,</span>
 <span>    lat <span class="op">=</span> <span class="op">~</span><span class="va">latitude</span>,</span>
 <span>    <span class="co"># on mouse hover points will show station id and name</span></span>
@@ -145,7 +145,7 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List all available fields</span></span>
 <span><span class="va">wn</span><span class="op">$</span><span class="va">fields</span></span>
-<span><span class="co">#&gt; # A tibble: 253 × 12</span></span>
+<span><span class="co">#&gt; # A tibble: 264 × 12</span></span>
 <span><span class="co">#&gt;       id standard_name     use_for measure_type qualifier source_field data_type</span></span>
 <span><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;    </span></span>
 <span><span class="co">#&gt;  1     1 5min_air_temp_f_… ""      Air Temp     avg       airtemp_c_a… float    </span></span>
@@ -158,15 +158,15 @@
 <span><span class="co">#&gt;  8     9 5min_dew_point_f… ""      Dew Point    avg       dewpointtem… float    </span></span>
 <span><span class="co">#&gt;  9    10 60min_dew_point_… ""      Dew Point    avg       dewpointtem… float    </span></span>
 <span><span class="co">#&gt; 10    11 daily_dew_point_… ""      Dew Point    max       dewpointtem… float    </span></span>
-<span><span class="co">#&gt; # ℹ 243 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 254 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 5 more variables: source_units &lt;chr&gt;, final_units &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   units_abbrev &lt;chr&gt;, conversion_type &lt;chr&gt;, collection_frequency &lt;chr&gt;</span></span>
 <span></span>
 <span><span class="co"># Calling find_fields with no args shows types and frequency options</span></span>
 <span><span class="va">wn</span><span class="op">$</span><span class="fu">find_fields</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Available [type] values: 'Air Temp', 'Battery', 'Dew Point', 'Leaf Wetness', 'Rain', 'Relative Humidity', 'Soil Moisture', 'Soil Temp', 'Wind Speed', 'Wind Dir', 'Canopy Wetness', 'Pressure', 'Solar Radiation', 'Evapotranspiration’', 'Cattle Comfort Index', '', 'chill_hours', 'rain', 'air_temp', 'apparent_temp', 'wind_speed', 'air_pressure', 'dew_point', 'evapotranspiration', 'cattle_comfort_index', 'wbgt', 'gdd', 'hdd', 'cdd', 'solar_radiation'</span></span>
-<span><span class="co">#&gt; Available [freq] values: '5min', '60min', 'daily'</span></span>
-<span><span class="co">#&gt; # A tibble: 253 × 12</span></span>
+<span><span class="co">#&gt; Available [type] values: 'Air Temp', 'Battery', 'Dew Point', 'Leaf Wetness', 'Rain', 'Relative Humidity', 'Soil Moisture', 'Soil Temp', 'Wind Speed', 'Wind Dir', 'Canopy Wetness', 'Pressure', 'Solar Radiation', 'Evapotranspiration’', 'Cattle Comfort Index', '', 'chill_hours', 'plant_available_water_5cm', 'plant_available_water_10cm', 'plant_available_water_20cm', 'plant_available_water_50cm', 'plant_available_water_100cm', 'plant_available_water_max_5cm', 'plant_available_water_max_10cm', 'plant_available_water_max_20cm', 'plant_available_water_max_50cm', 'plant_available_water_max_100cm', 'rain', 'air_temp', 'apparent_temp', 'wind_speed', 'air_pressure', 'dew_point', 'evapotranspiration', 'cattle_comfort_index', 'wbgt', 'gdd', 'hdd', 'cdd', 'solar_radiation'</span></span>
+<span><span class="co">#&gt; Available [freq] values: '5min', '60min', 'daily', 'daily4am'</span></span>
+<span><span class="co">#&gt; # A tibble: 264 × 12</span></span>
 <span><span class="co">#&gt;       id standard_name     use_for measure_type qualifier source_field data_type</span></span>
 <span><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;    </span></span>
 <span><span class="co">#&gt;  1     1 5min_air_temp_f_… ""      Air Temp     avg       airtemp_c_a… float    </span></span>
@@ -179,7 +179,7 @@
 <span><span class="co">#&gt;  8     9 5min_dew_point_f… ""      Dew Point    avg       dewpointtem… float    </span></span>
 <span><span class="co">#&gt;  9    10 60min_dew_point_… ""      Dew Point    avg       dewpointtem… float    </span></span>
 <span><span class="co">#&gt; 10    11 daily_dew_point_… ""      Dew Point    max       dewpointtem… float    </span></span>
-<span><span class="co">#&gt; # ℹ 243 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 254 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 5 more variables: source_units &lt;chr&gt;, final_units &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   units_abbrev &lt;chr&gt;, conversion_type &lt;chr&gt;, collection_frequency &lt;chr&gt;</span></span>
 <span></span>
@@ -234,7 +234,12 @@
 <h3 id="fetch-observations">Fetch observations<a class="anchor" aria-label="anchor" href="#fetch-observations"></a>
 </h3>
 <div class="section level4">
-<h4 id="single-station">Single station<a class="anchor" aria-label="anchor" href="#single-station"></a>
+<h4 id="note-on-dates-and-times">Note on dates and times<a class="anchor" aria-label="anchor" href="#note-on-dates-and-times"></a>
+</h4>
+<p>The examples below use <code>lubridate</code> functions for convenient date or time ranges for pulling data from Wisconet. The <code>today()</code> function returns today’s date, the <code>now()</code> function returns the current date and time. You can also set the start or end date specifically using the format “YYYY-MM-DD” like <code>start_date = "2026-01-01"</code>. To specify a start/end time, use the format “YYYY-MM-DD HH:MM:SS” using 24-hour notation, like “2026-01-01 12:00:00” for noon. Times are assumed to be in US Central time unless the <code>timezone</code> option has been changed. If you use a date and don’t specify a time, it will return the entire day.</p>
+</div>
+<div class="section level4">
+<h4 id="get-data-for-a-single-station">Get data for a single station<a class="anchor" aria-label="anchor" href="#get-data-for-a-single-station"></a>
 </h4>
 <p>Use <code>get_measures()</code> to fetch data for one station. Provide a station ID, a vector of field <code>standard_name</code> values, and a time window. Returned data is formatted as <code>tibble</code> with station and measure metadata.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -252,8 +257,8 @@
 <span>  start_time <span class="op">=</span> <span class="fu">now</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fu">days</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
 <span>  end_time <span class="op">=</span> <span class="fu">now</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; GET ==&gt; HNCK: 2026-04-07 12:37:40.451894 to 2026-04-08 12:37:40.453854</span></span>
-<span><span class="co">#&gt;   Received 286 observations in 2.224s</span></span>
+<span><span class="co">#&gt; GET ==&gt; HNCK: 2026-05-04 11:50:23.432027 to 2026-05-05 11:50:23.434005</span></span>
+<span><span class="co">#&gt;   Received 286 observations in 1.719s</span></span>
 <span></span>
 <span><span class="co"># view results</span></span>
 <span><span class="fu">glimpse</span><span class="op">(</span><span class="va">obs</span><span class="op">)</span></span>
@@ -274,12 +279,59 @@
 <span><span class="co">#&gt; $ earliest_api_date    &lt;date&gt; 2023-02-02, 2023-02-02, 2023-02-02, 2023-02-02, …</span></span>
 <span><span class="co">#&gt; $ madis_id             &lt;chr&gt; "WIHCK", "WIHCK", "WIHCK", "WIHCK", "WIHCK", "WIH…</span></span>
 <span><span class="co">#&gt; $ climate_division     &lt;chr&gt; "Central", "Central", "Central", "Central", "Cent…</span></span>
-<span><span class="co">#&gt; $ collection_time      &lt;int&gt; 1775583600, 1775583600, 1775583600, 1775583900, 1…</span></span>
-<span><span class="co">#&gt; $ dttm                 &lt;dttm&gt; 2026-04-07 17:40:00, 2026-04-07 17:40:00, 2026-0…</span></span>
-<span><span class="co">#&gt; $ dttm_local           &lt;dttm&gt; 2026-04-07 12:40:00, 2026-04-07 12:40:00, 2026-0…</span></span>
-<span><span class="co">#&gt; $ date                 &lt;date&gt; 2026-04-07, 2026-04-07, 2026-04-07, 2026-04-07, …</span></span>
+<span><span class="co">#&gt; $ collection_time      &lt;int&gt; 1777913700, 1777913700, 1777913700, 1777914000, 1…</span></span>
+<span><span class="co">#&gt; $ dttm                 &lt;dttm&gt; 2026-05-04 16:55:00, 2026-05-04 16:55:00, 2026-0…</span></span>
+<span><span class="co">#&gt; $ dttm_local           &lt;dttm&gt; 2026-05-04 11:55:00, 2026-05-04 11:55:00, 2026-0…</span></span>
+<span><span class="co">#&gt; $ date                 &lt;date&gt; 2026-05-04, 2026-05-04, 2026-05-04, 2026-05-04, …</span></span>
 <span><span class="co">#&gt; $ measure_id           &lt;int&gt; 1, 18, 55, 1, 18, 55, 1, 18, 55, 1, 18, 55, 1, 18…</span></span>
-<span><span class="co">#&gt; $ measure_value        &lt;dbl&gt; 35.3, 29.2, 4.1, 35.6, 30.3, 5.1, 35.8, 29.5, 4.0…</span></span>
+<span><span class="co">#&gt; $ measure_value        &lt;dbl&gt; 73.3, 29.3, 10.3, 73.5, 29.6, 9.4, 74.0, 29.1, 11…</span></span>
+<span><span class="co">#&gt; $ standard_name        &lt;chr&gt; "5min_air_temp_f_avg", "5min_relative_humidity_pc…</span></span>
+<span><span class="co">#&gt; $ measure_type         &lt;chr&gt; "Air Temp", "Relative Humidity", "Wind Speed", "A…</span></span>
+<span><span class="co">#&gt; $ qualifier            &lt;chr&gt; "avg", "avg", "avg", "avg", "avg", "avg", "avg", …</span></span>
+<span><span class="co">#&gt; $ source_field         &lt;chr&gt; "airtemp_c_avg@Table5", "relhum_avg@Table5", "win…</span></span>
+<span><span class="co">#&gt; $ data_type            &lt;chr&gt; "float", "float", "float", "float", "float", "flo…</span></span>
+<span><span class="co">#&gt; $ source_units         &lt;chr&gt; "celsius", "pct", "meters/sec", "celsius", "pct",…</span></span>
+<span><span class="co">#&gt; $ final_units          &lt;chr&gt; "fahrenheit", "pct", "mph", "fahrenheit", "pct", …</span></span>
+<span><span class="co">#&gt; $ units_abbrev         &lt;chr&gt; "f", "pct", "mph", "f", "pct", "mph", "f", "pct",…</span></span>
+<span><span class="co">#&gt; $ conversion_type      &lt;chr&gt; "c2f", "", "ms2mph", "c2f", "", "ms2mph", "c2f", …</span></span>
+<span><span class="co">#&gt; $ collection_frequency &lt;chr&gt; "5min", "5min", "5min", "5min", "5min", "5min", "…</span></span></code></pre></div>
+<p>Or, use a specific date/time range. Format like “YYYY-MM-DD” or “YYYY-MM-DD HH:MM:SS” (using 24 hour time). If time is ommitted it assumes you want the full day (midnight - midnight local time).</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># specific time range</span></span>
+<span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="va">wn</span><span class="op">$</span><span class="fu">get_measures</span><span class="op">(</span></span>
+<span>  stn_id <span class="op">=</span> <span class="st">"HNCK"</span>, <span class="co"># Hancock</span></span>
+<span>  fields <span class="op">=</span> <span class="va">measures_5min</span>,</span>
+<span>  start_time <span class="op">=</span> <span class="st">"2026-01-01 00:00:00"</span>,</span>
+<span>  end_time <span class="op">=</span> <span class="st">"2026-01-01 12:00:00"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; GET ==&gt; HNCK: 2026-01-01 00:00:00 to 2026-01-01 12:00:00</span></span>
+<span><span class="co">#&gt;   Received 145 observations in 2.419s</span></span>
+<span></span>
+<span><span class="co"># view results</span></span>
+<span><span class="fu">glimpse</span><span class="op">(</span><span class="va">obs</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 435</span></span>
+<span><span class="co">#&gt; Columns: 31</span></span>
+<span><span class="co">#&gt; $ station_id           &lt;chr&gt; "HNCK", "HNCK", "HNCK", "HNCK", "HNCK", "HNCK", "…</span></span>
+<span><span class="co">#&gt; $ station_slug         &lt;chr&gt; "hancock", "hancock", "hancock", "hancock", "hanc…</span></span>
+<span><span class="co">#&gt; $ station_name         &lt;chr&gt; "Hancock", "Hancock", "Hancock", "Hancock", "Hanc…</span></span>
+<span><span class="co">#&gt; $ latitude             &lt;dbl&gt; 44.1188, 44.1188, 44.1188, 44.1188, 44.1188, 44.1…</span></span>
+<span><span class="co">#&gt; $ longitude            &lt;dbl&gt; -89.5333, -89.5333, -89.5333, -89.5333, -89.5333,…</span></span>
+<span><span class="co">#&gt; $ elevation            &lt;dbl&gt; 333, 333, 333, 333, 333, 333, 333, 333, 333, 333,…</span></span>
+<span><span class="co">#&gt; $ location             &lt;chr&gt; "Not set", "Not set", "Not set", "Not set", "Not …</span></span>
+<span><span class="co">#&gt; $ station_timezone     &lt;chr&gt; "US/Central", "US/Central", "US/Central", "US/Cen…</span></span>
+<span><span class="co">#&gt; $ city                 &lt;chr&gt; "Hancock", "Hancock", "Hancock", "Hancock", "Hanc…</span></span>
+<span><span class="co">#&gt; $ county               &lt;chr&gt; "Waushara County", "Waushara County", "Waushara C…</span></span>
+<span><span class="co">#&gt; $ region               &lt;chr&gt; "Central", "Central", "Central", "Central", "Cent…</span></span>
+<span><span class="co">#&gt; $ state                &lt;chr&gt; "WI", "WI", "WI", "WI", "WI", "WI", "WI", "WI", "…</span></span>
+<span><span class="co">#&gt; $ earliest_api_date    &lt;date&gt; 2023-02-02, 2023-02-02, 2023-02-02, 2023-02-02, …</span></span>
+<span><span class="co">#&gt; $ madis_id             &lt;chr&gt; "WIHCK", "WIHCK", "WIHCK", "WIHCK", "WIHCK", "WIH…</span></span>
+<span><span class="co">#&gt; $ climate_division     &lt;chr&gt; "Central", "Central", "Central", "Central", "Cent…</span></span>
+<span><span class="co">#&gt; $ collection_time      &lt;int&gt; 1767247200, 1767247200, 1767247200, 1767247500, 1…</span></span>
+<span><span class="co">#&gt; $ dttm                 &lt;dttm&gt; 2026-01-01 06:00:00, 2026-01-01 06:00:00, 2026-0…</span></span>
+<span><span class="co">#&gt; $ dttm_local           &lt;dttm&gt; 2026-01-01 00:00:00, 2026-01-01 00:00:00, 2026-0…</span></span>
+<span><span class="co">#&gt; $ date                 &lt;date&gt; 2026-01-01, 2026-01-01, 2026-01-01, 2026-01-01, …</span></span>
+<span><span class="co">#&gt; $ measure_id           &lt;int&gt; 1, 18, 55, 1, 18, 55, 1, 18, 55, 1, 18, 55, 1, 18…</span></span>
+<span><span class="co">#&gt; $ measure_value        &lt;dbl&gt; 2.6, 80.5, 0.2, 2.3, 82.3, 0.9, 2.4, 82.7, 1.0, 1…</span></span>
 <span><span class="co">#&gt; $ standard_name        &lt;chr&gt; "5min_air_temp_f_avg", "5min_relative_humidity_pc…</span></span>
 <span><span class="co">#&gt; $ measure_type         &lt;chr&gt; "Air Temp", "Relative Humidity", "Wind Speed", "A…</span></span>
 <span><span class="co">#&gt; $ qualifier            &lt;chr&gt; "avg", "avg", "avg", "avg", "avg", "avg", "avg", …</span></span>
@@ -292,10 +344,10 @@
 <span><span class="co">#&gt; $ collection_frequency &lt;chr&gt; "5min", "5min", "5min", "5min", "5min", "5min", "…</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="multiple-stations">Multiple stations<a class="anchor" aria-label="anchor" href="#multiple-stations"></a>
+<h4 id="get-data-from-multiple-stations">Get data from multiple stations<a class="anchor" aria-label="anchor" href="#get-data-from-multiple-stations"></a>
 </h4>
-<p>Use <code>get_measures_stations()</code> to fetch data for a specific set of stations in parallel:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<p>Use <code>get_measures_stations()</code> to fetch data for a specific set of stations in parallel. Note if you want data from all stations, see the use of <code>get_measures_all()</code> below.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># run the query</span></span>
 <span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="va">wn</span><span class="op">$</span><span class="fu">get_measures_stations</span><span class="op">(</span></span>
 <span>  stn_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ALTN"</span>, <span class="st">"HNCK"</span><span class="op">)</span>, <span class="co"># Arlington, Hancock</span></span>
@@ -304,11 +356,11 @@
 <span>  end_time <span class="op">=</span> <span class="fu">now</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Fetching 2 stations</span></span>
-<span><span class="co">#&gt; Done: 2/2 stations returned data in 2.1s</span></span>
+<span><span class="co">#&gt;   Done: 2/2 stations returned data in 1.4s</span></span>
 <span></span>
 <span><span class="co"># view results</span></span>
 <span><span class="fu">glimpse</span><span class="op">(</span><span class="va">obs</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Rows: 1,719</span></span>
+<span><span class="co">#&gt; Rows: 1,716</span></span>
 <span><span class="co">#&gt; Columns: 31</span></span>
 <span><span class="co">#&gt; $ station_id           &lt;chr&gt; "ALTN", "ALTN", "ALTN", "ALTN", "ALTN", "ALTN", "…</span></span>
 <span><span class="co">#&gt; $ station_slug         &lt;chr&gt; "arlington", "arlington", "arlington", "arlington…</span></span>
@@ -325,12 +377,12 @@
 <span><span class="co">#&gt; $ earliest_api_date    &lt;date&gt; 2023-05-22, 2023-05-22, 2023-05-22, 2023-05-22, …</span></span>
 <span><span class="co">#&gt; $ madis_id             &lt;chr&gt; "WIALT", "WIALT", "WIALT", "WIALT", "WIALT", "WIA…</span></span>
 <span><span class="co">#&gt; $ climate_division     &lt;chr&gt; "South Central", "South Central", "South Central"…</span></span>
-<span><span class="co">#&gt; $ collection_time      &lt;int&gt; 1775583600, 1775583600, 1775583600, 1775583900, 1…</span></span>
-<span><span class="co">#&gt; $ dttm                 &lt;dttm&gt; 2026-04-07 17:40:00, 2026-04-07 17:40:00, 2026-0…</span></span>
-<span><span class="co">#&gt; $ dttm_local           &lt;dttm&gt; 2026-04-07 12:40:00, 2026-04-07 12:40:00, 2026-0…</span></span>
-<span><span class="co">#&gt; $ date                 &lt;date&gt; 2026-04-07, 2026-04-07, 2026-04-07, 2026-04-07, …</span></span>
+<span><span class="co">#&gt; $ collection_time      &lt;int&gt; 1777913700, 1777913700, 1777913700, 1777914000, 1…</span></span>
+<span><span class="co">#&gt; $ dttm                 &lt;dttm&gt; 2026-05-04 16:55:00, 2026-05-04 16:55:00, 2026-0…</span></span>
+<span><span class="co">#&gt; $ dttm_local           &lt;dttm&gt; 2026-05-04 11:55:00, 2026-05-04 11:55:00, 2026-0…</span></span>
+<span><span class="co">#&gt; $ date                 &lt;date&gt; 2026-05-04, 2026-05-04, 2026-05-04, 2026-05-04, …</span></span>
 <span><span class="co">#&gt; $ measure_id           &lt;int&gt; 1, 18, 55, 1, 18, 55, 1, 18, 55, 1, 18, 55, 1, 18…</span></span>
-<span><span class="co">#&gt; $ measure_value        &lt;dbl&gt; 34.7, 31.9, 7.4, 35.0, 30.9, 5.4, 34.8, 31.4, 5.6…</span></span>
+<span><span class="co">#&gt; $ measure_value        &lt;dbl&gt; 75.2, 27.1, 20.1, 75.3, 27.4, 20.3, 75.9, 26.4, 1…</span></span>
 <span><span class="co">#&gt; $ standard_name        &lt;chr&gt; "5min_air_temp_f_avg", "5min_relative_humidity_pc…</span></span>
 <span><span class="co">#&gt; $ measure_type         &lt;chr&gt; "Air Temp", "Relative Humidity", "Wind Speed", "A…</span></span>
 <span><span class="co">#&gt; $ qualifier            &lt;chr&gt; "avg", "avg", "avg", "avg", "avg", "avg", "avg", …</span></span>
@@ -343,10 +395,10 @@
 <span><span class="co">#&gt; $ collection_frequency &lt;chr&gt; "5min", "5min", "5min", "5min", "5min", "5min", "…</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="specific-startend-times-per-station">Specific start/end times per station<a class="anchor" aria-label="anchor" href="#specific-startend-times-per-station"></a>
+<h4 id="use-specific-startend-times-per-station">Use specific start/end times per station<a class="anchor" aria-label="anchor" href="#use-specific-startend-times-per-station"></a>
 </h4>
 <p>You can also pass a named list of per-station start and end times if you need to collect data for different timeframes by station.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># fields to download</span></span>
 <span><span class="va">measures_daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"daily_air_temp_f_min"</span>,</span>
@@ -371,7 +423,7 @@
 <span>  end_time <span class="op">=</span> <span class="va">ends</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Fetching 2 stations</span></span>
-<span><span class="co">#&gt; Done: 2/2 stations returned data in 2.7s</span></span>
+<span><span class="co">#&gt;   Done: 2/2 stations returned data in 1.8s</span></span>
 <span></span>
 <span><span class="co"># show results</span></span>
 <span><span class="fu">glimpse</span><span class="op">(</span><span class="va">obs</span><span class="op">)</span></span>
@@ -392,12 +444,12 @@
 <span><span class="co">#&gt; $ earliest_api_date    &lt;date&gt; 2023-05-22, 2023-05-22, 2023-05-22, 2023-05-22, …</span></span>
 <span><span class="co">#&gt; $ madis_id             &lt;chr&gt; "WIALT", "WIALT", "WIALT", "WIALT", "WIALT", "WIA…</span></span>
 <span><span class="co">#&gt; $ climate_division     &lt;chr&gt; "South Central", "South Central", "South Central"…</span></span>
-<span><span class="co">#&gt; $ collection_time      &lt;int&gt; 1770616800, 1770616800, 1770616800, 1770703200, 1…</span></span>
-<span><span class="co">#&gt; $ dttm                 &lt;dttm&gt; 2026-02-09 06:00:00, 2026-02-09 06:00:00, 2026-0…</span></span>
-<span><span class="co">#&gt; $ dttm_local           &lt;dttm&gt; 2026-02-09, 2026-02-09, 2026-02-09, 2026-02-10, …</span></span>
-<span><span class="co">#&gt; $ date                 &lt;date&gt; 2026-02-09, 2026-02-09, 2026-02-09, 2026-02-10, …</span></span>
+<span><span class="co">#&gt; $ collection_time      &lt;int&gt; 1772776800, 1772776800, 1772776800, 1772863200, 1…</span></span>
+<span><span class="co">#&gt; $ dttm                 &lt;dttm&gt; 2026-03-06 06:00:00, 2026-03-06 06:00:00, 2026-0…</span></span>
+<span><span class="co">#&gt; $ dttm_local           &lt;dttm&gt; 2026-03-06, 2026-03-06, 2026-03-06, 2026-03-07, …</span></span>
+<span><span class="co">#&gt; $ date                 &lt;date&gt; 2026-03-06, 2026-03-06, 2026-03-06, 2026-03-07, …</span></span>
 <span><span class="co">#&gt; $ measure_id           &lt;int&gt; 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4…</span></span>
-<span><span class="co">#&gt; $ measure_value        &lt;dbl&gt; 22.1, 27.0, 15.6, 27.1, 34.2, 15.8, 32.9, 38.7, 2…</span></span>
+<span><span class="co">#&gt; $ measure_value        &lt;dbl&gt; 40.5, 45.7, 37.2, 47.5, 57.6, 38.8, 44.8, 56.5, 3…</span></span>
 <span><span class="co">#&gt; $ standard_name        &lt;chr&gt; "daily_air_temp_f_avg", "daily_air_temp_f_max", "…</span></span>
 <span><span class="co">#&gt; $ measure_type         &lt;chr&gt; "Air Temp", "Air Temp", "Air Temp", "Air Temp", "…</span></span>
 <span><span class="co">#&gt; $ qualifier            &lt;chr&gt; "avg", "max", "min", "avg", "max", "min", "avg", …</span></span>
@@ -410,22 +462,21 @@
 <span><span class="co">#&gt; $ collection_frequency &lt;chr&gt; "daily", "daily", "daily", "daily", "daily", "dai…</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="all-active-stations">All active stations<a class="anchor" aria-label="anchor" href="#all-active-stations"></a>
+<h4 id="get-data-from-all-active-stations">Get data from all active stations<a class="anchor" aria-label="anchor" href="#get-data-from-all-active-stations"></a>
 </h4>
 <p>Use <code>get_measures_all()</code> to query every active station. Note that this will hit the API throttle and may take a minute to resolve.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># run the query</span></span>
 <span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="va">wn</span><span class="op">$</span><span class="fu">get_measures_all</span><span class="op">(</span></span>
 <span>  fields <span class="op">=</span> <span class="va">measures_daily</span>,</span>
 <span>  start_time <span class="op">=</span> <span class="fu">today</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fu">days</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>  end_time <span class="op">=</span> <span class="fu">today</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Fetching 78 stations</span></span>
-<span><span class="co">#&gt; Done: 78/78 stations returned data in 63.1s</span></span>
+<span><span class="co">#&gt; Fetching 79 stations</span></span>
 <span></span>
 <span><span class="co"># show results</span></span>
 <span><span class="fu">glimpse</span><span class="op">(</span><span class="va">obs</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Rows: 684</span></span>
+<span><span class="co">#&gt; Rows: 711</span></span>
 <span><span class="co">#&gt; Columns: 31</span></span>
 <span><span class="co">#&gt; $ station_id           &lt;chr&gt; "ANGO", "ANGO", "ANGO", "ANGO", "ANGO", "ANGO", "…</span></span>
 <span><span class="co">#&gt; $ station_slug         &lt;chr&gt; "antigo", "antigo", "antigo", "antigo", "antigo",…</span></span>
@@ -442,12 +493,12 @@
 <span><span class="co">#&gt; $ earliest_api_date    &lt;date&gt; 2024-09-11, 2024-09-11, 2024-09-11, 2024-09-11, …</span></span>
 <span><span class="co">#&gt; $ madis_id             &lt;chr&gt; "WIANT", "WIANT", "WIANT", "WIANT", "WIANT", "WIA…</span></span>
 <span><span class="co">#&gt; $ climate_division     &lt;chr&gt; "Northeast", "Northeast", "Northeast", "Northeast…</span></span>
-<span><span class="co">#&gt; $ collection_time      &lt;int&gt; 1775365200, 1775365200, 1775365200, 1775451600, 1…</span></span>
-<span><span class="co">#&gt; $ dttm                 &lt;dttm&gt; 2026-04-05 05:00:00, 2026-04-05 05:00:00, 2026-0…</span></span>
-<span><span class="co">#&gt; $ dttm_local           &lt;dttm&gt; 2026-04-05, 2026-04-05, 2026-04-05, 2026-04-06, …</span></span>
-<span><span class="co">#&gt; $ date                 &lt;date&gt; 2026-04-05, 2026-04-05, 2026-04-05, 2026-04-06, …</span></span>
+<span><span class="co">#&gt; $ collection_time      &lt;int&gt; 1777698000, 1777698000, 1777698000, 1777784400, 1…</span></span>
+<span><span class="co">#&gt; $ dttm                 &lt;dttm&gt; 2026-05-02 05:00:00, 2026-05-02 05:00:00, 2026-0…</span></span>
+<span><span class="co">#&gt; $ dttm_local           &lt;dttm&gt; 2026-05-02, 2026-05-02, 2026-05-02, 2026-05-03, …</span></span>
+<span><span class="co">#&gt; $ date                 &lt;date&gt; 2026-05-02, 2026-05-02, 2026-05-02, 2026-05-03, …</span></span>
 <span><span class="co">#&gt; $ measure_id           &lt;int&gt; 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4, 6, 3, 4…</span></span>
-<span><span class="co">#&gt; $ measure_value        &lt;dbl&gt; 32.5, 37.2, 29.7, 35.2, 45.3, 27.0, 30.6, 36.1, 1…</span></span>
+<span><span class="co">#&gt; $ measure_value        &lt;dbl&gt; 35.8, 42.1, 27.5, 43.0, 57.0, 24.1, 54.9, 67.5, 4…</span></span>
 <span><span class="co">#&gt; $ standard_name        &lt;chr&gt; "daily_air_temp_f_avg", "daily_air_temp_f_max", "…</span></span>
 <span><span class="co">#&gt; $ measure_type         &lt;chr&gt; "Air Temp", "Air Temp", "Air Temp", "Air Temp", "…</span></span>
 <span><span class="co">#&gt; $ qualifier            &lt;chr&gt; "avg", "max", "min", "avg", "max", "min", "avg", …</span></span>
@@ -464,7 +515,7 @@
 <h3 id="handling-received-data">Handling received data<a class="anchor" aria-label="anchor" href="#handling-received-data"></a>
 </h3>
 <p>You can simplify the returned data by selecting only a few important data columns.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># run the query</span></span>
 <span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="va">wn</span><span class="op">$</span><span class="fu">get_measures_stations</span><span class="op">(</span></span>
 <span>  stn_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ALTN"</span>, <span class="st">"HNCK"</span><span class="op">)</span>, <span class="co"># Arlington, Hancock</span></span>
@@ -473,7 +524,7 @@
 <span>  end_time <span class="op">=</span> <span class="fu">now</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Fetching 2 stations</span></span>
-<span><span class="co">#&gt; Done: 2/2 stations returned data in 3.4s</span></span>
+<span><span class="co">#&gt;   Done: 2/2 stations returned data in 1.4s</span></span>
 <span></span>
 <span><span class="co"># select a few specific columns</span></span>
 <span><span class="va">select_obs</span> <span class="op">&lt;-</span> <span class="va">obs</span> <span class="op">|&gt;</span></span>
@@ -485,23 +536,23 @@
 <span></span>
 <span><span class="co"># view data</span></span>
 <span><span class="va">obs_wide</span></span>
-<span><span class="co">#&gt; # A tibble: 62 × 6</span></span>
+<span><span class="co">#&gt; # A tibble: 60 × 6</span></span>
 <span><span class="co">#&gt;    station_id dttm_local          date       daily_air_temp_f_avg</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;      &lt;dttm&gt;              &lt;date&gt;                    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 ALTN       2026-03-09 00:00:00 2026-03-09                 43.7</span></span>
-<span><span class="co">#&gt;  2 ALTN       2026-03-10 00:00:00 2026-03-10                 53.6</span></span>
-<span><span class="co">#&gt;  3 ALTN       2026-03-11 00:00:00 2026-03-11                 39.6</span></span>
-<span><span class="co">#&gt;  4 ALTN       2026-03-12 00:00:00 2026-03-12                 32.2</span></span>
-<span><span class="co">#&gt;  5 ALTN       2026-03-13 00:00:00 2026-03-13                 34  </span></span>
-<span><span class="co">#&gt;  6 ALTN       2026-03-14 00:00:00 2026-03-14                 36.1</span></span>
-<span><span class="co">#&gt;  7 ALTN       2026-03-15 00:00:00 2026-03-15                 28.9</span></span>
-<span><span class="co">#&gt;  8 ALTN       2026-03-16 00:00:00 2026-03-16                 29.1</span></span>
-<span><span class="co">#&gt;  9 ALTN       2026-03-17 00:00:00 2026-03-17                 19.9</span></span>
-<span><span class="co">#&gt; 10 ALTN       2026-03-18 00:00:00 2026-03-18                 12.9</span></span>
-<span><span class="co">#&gt; # ℹ 52 more rows</span></span>
+<span><span class="co">#&gt;  1 ALTN       2026-04-06 00:00:00 2026-04-06                 41.4</span></span>
+<span><span class="co">#&gt;  2 ALTN       2026-04-07 00:00:00 2026-04-07                 38.3</span></span>
+<span><span class="co">#&gt;  3 ALTN       2026-04-08 00:00:00 2026-04-08                 30.4</span></span>
+<span><span class="co">#&gt;  4 ALTN       2026-04-09 00:00:00 2026-04-09                 49.5</span></span>
+<span><span class="co">#&gt;  5 ALTN       2026-04-10 00:00:00 2026-04-10                 48.2</span></span>
+<span><span class="co">#&gt;  6 ALTN       2026-04-11 00:00:00 2026-04-11                 43.5</span></span>
+<span><span class="co">#&gt;  7 ALTN       2026-04-12 00:00:00 2026-04-12                 43.7</span></span>
+<span><span class="co">#&gt;  8 ALTN       2026-04-13 00:00:00 2026-04-13                 60.3</span></span>
+<span><span class="co">#&gt;  9 ALTN       2026-04-14 00:00:00 2026-04-14                 66.2</span></span>
+<span><span class="co">#&gt; 10 ALTN       2026-04-15 00:00:00 2026-04-15                 63.9</span></span>
+<span><span class="co">#&gt; # ℹ 50 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 2 more variables: daily_air_temp_f_max &lt;dbl&gt;, daily_air_temp_f_min &lt;dbl&gt;</span></span></code></pre></div>
 <p>Generate a simple figure from the returned data:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot the data (in long form) from above</span></span>
 <span><span class="va">select_obs</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">dttm_local</span>, y <span class="op">=</span> <span class="va">measure_value</span>, color <span class="op">=</span> <span class="va">standard_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -515,23 +566,23 @@
 <h2 id="development">Development<a class="anchor" aria-label="anchor" href="#development"></a>
 </h2>
 <p>Common tasks:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># check package</span></span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># run tests</span></span>
+<span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_dir.html" class="external-link">test_dir</a></span><span class="op">(</span><span class="st">"tests"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># build readme from Rmd</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">build_readme</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># build documentation</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">document</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># check package</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">check</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># build package</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">build</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># run tests</span></span>
-<span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_dir.html" class="external-link">test_dir</a></span><span class="op">(</span><span class="st">"tests"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># build documentation</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">document</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># build readme from Rmd</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">build_readme</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># build a pdf manual</span></span>
+<span><span class="co"># build a pdf manual (optional)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">build_manual</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
